@@ -990,6 +990,7 @@ $$("[data-single]").forEach(g=>g.querySelectorAll("button").forEach(b=>b.onclick
   const k=g.dataset.single, was=b.classList.contains("on");
   g.querySelectorAll("button").forEach(x=>x.classList.remove("on"));
   if(!was){b.classList.add("on");S[k]=b.dataset.v}else S[k]="";
+  if(k==="baths") S.bathsAuto=false;   /* the client chose it themselves */
   if(k==="beds") applyTypeRules();
   update();
 }));
@@ -1080,10 +1081,10 @@ function applyTypeRules(){
   if(noRooms()){ S.baths=""; bathsQ.querySelectorAll("button").forEach(b=>b.classList.remove("on")); }
   $(".opt-note").textContent = bathsOpt() ? T("(optional)") : "";
   applyMustHaveRules();
-  /* Studio or 1 bedroom -> 1 bathroom filled in automatically, question hidden */
+  /* Studio or 1 bedroom -> "1" bathroom selected automatically (still visible, can be changed) */
   const autoBath = !noBeds() && ["Studio","1"].includes(S.beds);
   const setBath = v => { S.baths=v; bathsQ.querySelectorAll("button").forEach(b=>b.classList.toggle("on",b.dataset.v===v)); };
-  if(autoBath){ setBath("1"); S.bathsAuto=true; bathsQ.style.display="none"; }
+  if(autoBath){ if(!S.baths || S.bathsAuto){ setBath("1"); S.bathsAuto=true; } }
   else if(S.bathsAuto){ setBath(""); S.bathsAuto=false; }
 }
 
