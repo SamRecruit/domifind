@@ -409,6 +409,9 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px;
               <button class="chip" data-v="Relocation for work">Relocation for work</button>
               <button class="chip" data-v="Residency / permit">Residency / permit</button>
               <button class="chip" data-v="Business premises">Business premises</button>
+              <button class="chip" data-v="Build my own home">Build my own home</button>
+              <button class="chip" data-v="Development project">Development project</button>
+              <button class="chip" data-v="Investment">Investment</button>
             </div>
           </div>
           <div class="q">
@@ -510,8 +513,8 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px;
             </div>
           </div>
           <div class="q row">
-            <div><span class="field-l">Min. covered area (m²)</span><input type="number" id="area" placeholder="e.g. 120" min="0"></div>
-            <div><span class="field-l">Min. plot / garden (m²)</span><input type="number" id="plot" placeholder="optional" min="0"></div>
+            <div id="areaBox"><span class="field-l">Min. covered area (m²)</span><input type="number" id="area" placeholder="e.g. 120" min="0"></div>
+            <div id="plotBox"><span class="field-l lbl-res">Min. plot / garden (m²)</span><span class="field-l lbl-land" style="display:none">Min. plot size (m²)</span><input type="number" id="plot" placeholder="optional" min="0"></div>
           </div>
           <div class="err" data-err="2" data-dyn></div>
         </div>
@@ -777,7 +780,7 @@ const RU = {
 "When do you want to move / buy?":"Когда планируете переезд / покупку?","ASAP":"Как можно скорее","1–3 months":"1–3 месяца","Within 1 month":"В течение месяца",
 "Preferred language":"Предпочтительный язык","Best way to reach you":"Как с вами лучше связаться","Phone call":"Звонок",
 "Are you currently in Cyprus?":"Вы сейчас на Кипре?","Yes, I live here":"Да, живу здесь","Abroad, relocating":"За границей, переезжаю","Buying remotely":"Покупаю удалённо",
-"Please choose at least one option for:":"Пожалуйста, выберите хотя бы один вариант:","Location":"Локация","(optional)":"(необязательно)","Please choose at least one option":"Выберите хотя бы один вариант","Please choose one option":"Выберите один вариант","Please choose a minimum or maximum budget":"Выберите минимальный или максимальный бюджет","Please choose a delivery time":"Выберите срок сдачи","Please choose at least one neighbourhood":"Выберите хотя бы один район","Please choose a district on the map":"Выберите район на карте","This field is required":"Обязательное поле","Maximum delivery time":"Максимальный срок сдачи","When should the property be ready at the latest?":"Когда объект должен быть готов самое позднее?","< 6 months":"< 6 месяцев","< 1 year":"< 1 года","< 2 years":"< 2 лет","Required":"Обязательно","Required for off-plan properties: when must it be ready at the latest?":"Обязательно для строящихся объектов: когда он должен быть готов самое позднее?","← Choose another condition":"← Выбрать другое состояние","Delivery:":"Сдача:","Change":"Изменить","Neighbourhood":"Район","Full name":"Имя и фамилия","Phone / WhatsApp":"Телефон / WhatsApp","Please add your name and phone so we can reach you.":"Укажите имя и телефон, чтобы мы могли с вами связаться.",
+"Please choose at least one option for:":"Пожалуйста, выберите хотя бы один вариант:","Location":"Локация","Build my own home":"Построить свой дом","Development project":"Девелоперский проект","Investment":"Инвестиция","Min. plot size (m²)":"Мин. площадь участка (м²)","(optional)":"(необязательно)","Please choose at least one option":"Выберите хотя бы один вариант","Please choose one option":"Выберите один вариант","Please choose a minimum or maximum budget":"Выберите минимальный или максимальный бюджет","Please choose a delivery time":"Выберите срок сдачи","Please choose at least one neighbourhood":"Выберите хотя бы один район","Please choose a district on the map":"Выберите район на карте","This field is required":"Обязательное поле","Maximum delivery time":"Максимальный срок сдачи","When should the property be ready at the latest?":"Когда объект должен быть готов самое позднее?","< 6 months":"< 6 месяцев","< 1 year":"< 1 года","< 2 years":"< 2 лет","Required":"Обязательно","Required for off-plan properties: when must it be ready at the latest?":"Обязательно для строящихся объектов: когда он должен быть готов самое позднее?","← Choose another condition":"← Выбрать другое состояние","Delivery:":"Сдача:","Change":"Изменить","Neighbourhood":"Район","Full name":"Имя и фамилия","Phone / WhatsApp":"Телефон / WhatsApp","Please add your name and phone so we can reach you.":"Укажите имя и телефон, чтобы мы могли с вами связаться.",
 "Your brief is ready":"Ваша заявка готова","Check it below, then send it in one tap. We'll confirm within 24 hours and start searching.":"Проверьте заявку и отправьте в одно касание. Мы подтвердим в течение 24 часов и начнём поиск.",
 "💬 Send on WhatsApp":"💬 Отправить в WhatsApp","Fastest reply":"Самый быстрый ответ","✉️ Send by email":"✉️ Отправить по email","📋 Copy my brief":"📋 Скопировать заявку","Paste it anywhere":"Вставьте куда удобно",
 "← Back":"← Назад","Next →":"Далее →","Review my brief →":"Проверить заявку →",
@@ -868,7 +871,7 @@ const EL = {
 "When do you want to move / buy?":"Πότε θέλετε να μετακομίσετε / αγοράσετε;","ASAP":"Το συντομότερο","1–3 months":"1–3 μήνες","Within 1 month":"Μέσα σε 1 μήνα",
 "Preferred language":"Προτιμώμενη γλώσσα","Best way to reach you":"Πώς να επικοινωνήσουμε","Phone call":"Τηλεφωνικά",
 "Are you currently in Cyprus?":"Βρίσκεστε στην Κύπρο;","Yes, I live here":"Ναι, μένω εδώ","Abroad, relocating":"Στο εξωτερικό, μετακομίζω","Buying remotely":"Αγοράζω από απόσταση",
-"Please choose at least one option for:":"Παρακαλούμε επιλέξτε τουλάχιστον μία επιλογή για:","Location":"Τοποθεσία","(optional)":"(προαιρετικό)","Please choose at least one option":"Επιλέξτε τουλάχιστον μία επιλογή","Please choose one option":"Επιλέξτε μία επιλογή","Please choose a minimum or maximum budget":"Επιλέξτε ελάχιστο ή μέγιστο προϋπολογισμό","Please choose a delivery time":"Επιλέξτε χρόνο παράδοσης","Please choose at least one neighbourhood":"Επιλέξτε τουλάχιστον μία περιοχή","Please choose a district on the map":"Επιλέξτε επαρχία στον χάρτη","This field is required":"Υποχρεωτικό πεδίο","Maximum delivery time":"Μέγιστος χρόνος παράδοσης","When should the property be ready at the latest?":"Πότε πρέπει να είναι έτοιμο το ακίνητο το αργότερο;","< 6 months":"< 6 μήνες","< 1 year":"< 1 έτος","< 2 years":"< 2 έτη","Required":"Υποχρεωτικό","Required for off-plan properties: when must it be ready at the latest?":"Υποχρεωτικό για ακίνητα υπό κατασκευή: πότε πρέπει να είναι έτοιμο το αργότερο;","← Choose another condition":"← Επιλογή άλλης κατάστασης","Delivery:":"Παράδοση:","Change":"Αλλαγή","Neighbourhood":"Περιοχή","Full name":"Ονοματεπώνυμο","Phone / WhatsApp":"Τηλέφωνο / WhatsApp","Please add your name and phone so we can reach you.":"Συμπληρώστε όνομα και τηλέφωνο για να επικοινωνήσουμε μαζί σας.",
+"Please choose at least one option for:":"Παρακαλούμε επιλέξτε τουλάχιστον μία επιλογή για:","Location":"Τοποθεσία","Build my own home":"Κατασκευή δικού μου σπιτιού","Development project":"Αναπτυξιακό έργο","Investment":"Επένδυση","Min. plot size (m²)":"Ελάχ. εμβαδόν οικοπέδου (m²)","(optional)":"(προαιρετικό)","Please choose at least one option":"Επιλέξτε τουλάχιστον μία επιλογή","Please choose one option":"Επιλέξτε μία επιλογή","Please choose a minimum or maximum budget":"Επιλέξτε ελάχιστο ή μέγιστο προϋπολογισμό","Please choose a delivery time":"Επιλέξτε χρόνο παράδοσης","Please choose at least one neighbourhood":"Επιλέξτε τουλάχιστον μία περιοχή","Please choose a district on the map":"Επιλέξτε επαρχία στον χάρτη","This field is required":"Υποχρεωτικό πεδίο","Maximum delivery time":"Μέγιστος χρόνος παράδοσης","When should the property be ready at the latest?":"Πότε πρέπει να είναι έτοιμο το ακίνητο το αργότερο;","< 6 months":"< 6 μήνες","< 1 year":"< 1 έτος","< 2 years":"< 2 έτη","Required":"Υποχρεωτικό","Required for off-plan properties: when must it be ready at the latest?":"Υποχρεωτικό για ακίνητα υπό κατασκευή: πότε πρέπει να είναι έτοιμο το αργότερο;","← Choose another condition":"← Επιλογή άλλης κατάστασης","Delivery:":"Παράδοση:","Change":"Αλλαγή","Neighbourhood":"Περιοχή","Full name":"Ονοματεπώνυμο","Phone / WhatsApp":"Τηλέφωνο / WhatsApp","Please add your name and phone so we can reach you.":"Συμπληρώστε όνομα και τηλέφωνο για να επικοινωνήσουμε μαζί σας.",
 "Your brief is ready":"Το αίτημά σας είναι έτοιμο","Check it below, then send it in one tap. We'll confirm within 24 hours and start searching.":"Ελέγξτε το και στείλτε το με ένα πάτημα. Θα επιβεβαιώσουμε μέσα σε 24 ώρες και ξεκινάμε την αναζήτηση.",
 "💬 Send on WhatsApp":"💬 Αποστολή στο WhatsApp","Fastest reply":"Η πιο γρήγορη απάντηση","✉️ Send by email":"✉️ Αποστολή με email","📋 Copy my brief":"📋 Αντιγραφή αιτήματος","Paste it anywhere":"Επικολλήστε το όπου θέλετε",
 "← Back":"← Πίσω","Next →":"Επόμενο →","Review my brief →":"Έλεγχος αιτήματος →",
@@ -1081,11 +1084,41 @@ function applyTypeRules(){
   if(noRooms()){ S.baths=""; bathsQ.querySelectorAll("button").forEach(b=>b.classList.remove("on")); }
   $(".opt-note").textContent = bathsOpt() ? T("(optional)") : "";
   applyMustHaveRules();
+  applyPurposeAndSize();
   /* Studio or 1 bedroom -> "1" bathroom selected automatically (still visible, can be changed) */
   const autoBath = !noBeds() && ["Studio","1"].includes(S.beds);
   const setBath = v => { S.baths=v; bathsQ.querySelectorAll("button").forEach(b=>b.classList.toggle("on",b.dataset.v===v)); };
   if(autoBath){ if(!S.baths || S.bathsAuto){ setBath("1"); S.bathsAuto=true; } }
   else if(S.bathsAuto){ setBath(""); S.bathsAuto=false; }
+}
+
+/* Purpose options and size fields follow the property type */
+const PURPOSE_RES=["Main home","Holiday home","Investment / rental income","Relocation for work","Residency / permit"];
+const PURPOSE_FOR={
+  "Plot / Land":["Build my own home","Development project","Investment"],
+  "Office":["Business premises","Investment / rental income"],
+  "Shop":["Business premises","Investment / rental income"],
+  "Building":["Business premises","Investment / rental income","Development project"],
+};
+function applyPurposeAndSize(){
+  const t=S.types[0];
+  const allowed = PURPOSE_FOR[t] || (t ? PURPOSE_RES : [...PURPOSE_RES,"Business premises"]);
+  $$('[data-multi="purpose"] button').forEach(b=>{
+    const ok=allowed.includes(b.dataset.v);
+    b.style.display = ok ? "" : "none";
+    if(!ok && b.classList.contains("on")){ b.classList.remove("on"); S.purpose=S.purpose.filter(x=>x!==b.dataset.v); }
+  });
+  const land = t===LAND, noPlot = t==="Office"||t==="Shop";
+  $("#areaBox").style.display = land ? "none" : "";
+  $("#plotBox").style.display = noPlot ? "none" : "";
+  $("#plotBox .lbl-res").style.display = land ? "none" : "";
+  $("#plotBox .lbl-land").style.display = land ? "" : "none";
+  if(land) $("#area").value="";
+  /* land has no "condition" (new build, resale...) */
+  const condQ=$('[data-multi="condition"]').closest(".q");
+  condQ.style.display = land ? "none" : "";
+  if(land && S.condition.length){ S.condition=[]; S.delivery=""; condQ.querySelectorAll("button").forEach(b=>b.classList.remove("on")); renderDlv(); }
+  if(noPlot) $("#plot").value="";
 }
 
 /* Must-haves that make no sense for a property type are hidden */
@@ -1128,7 +1161,7 @@ const triOK = i => [...$$("[data-tri]")[i].querySelectorAll("button")].some(b=>S
 const REQ = {
   0: [["Property type",()=>S.types.length,()=>chipsQ('[data-multi="types"]')],
       ["Purpose",()=>S.purpose.length,()=>chipsQ('[data-multi="purpose"]')],
-      ["Condition",()=>S.condition.length,()=>chipsQ('[data-multi="condition"]')],
+      ["Condition",()=>S.types[0]===LAND||S.condition.length,()=>chipsQ('[data-multi="condition"]')],
       ["Maximum delivery time",()=>!S.condition.includes(OFFPLAN)||S.delivery,()=>chipsQ('[data-multi="condition"]'),"Please choose a delivery time"]],
   1: [["Location",()=>S.districts.length,()=>({q:null,box:$(".cymap")}),"Please choose a district on the map"],
       ["Neighbourhood",()=>!S.districts.length||S.districts.every(d=>S.areas[d]&&S.areas[d].length),()=>({q:null,box:$("#areas")}),"Please choose at least one neighbourhood"],
@@ -1216,7 +1249,7 @@ function budgetText(){
 }
 function sizeText(){
   const p=[]; if(S.beds)p.push(S.beds==="Studio"?T("Studio"):S.beds+" "+T("bed")); if(S.baths)p.push(S.baths+" "+T("bath"));
-  if($("#area").value)p.push(T("min")+" "+$("#area").value+" m²"); if($("#plot").value)p.push(T("plot")+" "+$("#plot").value+" m²");
+  if($("#area").value)p.push(T("min")+" "+$("#area").value+" m²"); if($("#plot").value)p.push(T("plot")+" "+$("#plot").value+" m²");   /* plot size (land) or garden */
   return p.join(" · ");
 }
 const must=()=>Object.keys(S.fac).filter(k=>S.fac[k]===2), nice=()=>Object.keys(S.fac).filter(k=>S.fac[k]===1);
