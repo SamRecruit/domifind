@@ -1214,10 +1214,10 @@ function toast(m){const t=$("#toast");t.textContent=m;t.classList.add("show");se
 
 /* Draft memory (this browser only) */
 const FIELDS=["pmin","pmax","area","plot","near","nogo","notes","name","phone","email"];
-function save(){try{localStorage.setItem("domifind-draft",JSON.stringify({S,f:Object.fromEntries(FIELDS.map(i=>[i,$("#"+i).value])),flex:$("#flex").checked}))}catch(e){}}
+function save(){try{localStorage.setItem("domifind-draft-v2",JSON.stringify({S,f:Object.fromEntries(FIELDS.map(i=>[i,$("#"+i).value])),flex:$("#flex").checked}))}catch(e){}}
 function load(){
   try{
-    const d=JSON.parse(localStorage.getItem("domifind-draft")||"null"); if(!d) return;
+    const d=JSON.parse(localStorage.getItem("domifind-draft-v2")||"null"); if(!d) return;
     Object.assign(S,d.S);
     ["types","purpose","condition"].forEach(k=>{ if(Array.isArray(S[k])) S[k]=S[k].slice(0,1) });
     $$("#deal button").forEach(b=>b.classList.toggle("on",b.dataset.v===S.deal));
