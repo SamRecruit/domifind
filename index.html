@@ -989,7 +989,9 @@ $$("[data-multi]").forEach(g=>g.querySelectorAll("button").forEach(b=>b.onclick=
 $$("[data-single]").forEach(g=>g.querySelectorAll("button").forEach(b=>b.onclick=()=>{
   const k=g.dataset.single, was=b.classList.contains("on");
   g.querySelectorAll("button").forEach(x=>x.classList.remove("on"));
-  if(!was){b.classList.add("on");S[k]=b.dataset.v}else S[k]=""; update();
+  if(!was){b.classList.add("on");S[k]=b.dataset.v}else S[k]="";
+  if(k==="beds") applyTypeRules();
+  update();
 }));
 $$("[data-tri]").forEach(g=>g.querySelectorAll("button").forEach(b=>b.onclick=()=>{
   const v=b.dataset.v, nx=((S.fac[v]||0)+1)%3;
@@ -1077,6 +1079,11 @@ function applyTypeRules(){
   if(noBeds()){ S.beds=""; bedsQ.querySelectorAll("button").forEach(b=>b.classList.remove("on")); }
   if(noRooms()){ S.baths=""; bathsQ.querySelectorAll("button").forEach(b=>b.classList.remove("on")); }
   $(".opt-note").textContent = bathsOpt() ? T("(optional)") : "";
+  /* Studio or 1 bedroom -> 1 bathroom filled in automatically, question hidden */
+  const autoBath = !noBeds() && ["Studio","1"].includes(S.beds);
+  const setBath = v => { S.baths=v; bathsQ.querySelectorAll("button").forEach(b=>b.classList.toggle("on",b.dataset.v===v)); };
+  if(autoBath){ setBath("1"); S.bathsAuto=true; bathsQ.style.display="none"; }
+  else if(S.bathsAuto){ setBath(""); S.bathsAuto=false; }
 }
 
 /* Every multiple-choice question needs at least one answer; free-text boxes stay optional */
