@@ -898,7 +898,7 @@ const AREAS = {
 };
 Object.assign(RU,{"Old Port / Marina":"Старый порт / Марина","Limassol villages (Souni, Fasoula…)":"Деревни Лимассола (Суни, Фасула…)","Paphos centre":"Центр Пафоса","Paphos villages":"Деревни Пафоса","Nicosia villages":"Деревни Никосии","Larnaca villages":"Деревни Ларнаки","Finikoudes / seafront":"Финикудес / набережная"});
 
-const BUY = [50,100,150,200,250,300,400,500,600,750,1000,1500,2000,3000,5000,10000].map(k=>k*1000);
+const BUY = [100,150,200,250,300,400,500,600,750,1000,1500,2000,3000,5000,10000].map(k=>k*1000);
 const RENT = [500,750,1000,1250,1500,2000,2500,3000,4000,5000,7500,10000];
 
 const S = {deal:"Buy",types:[],purpose:[],condition:[],districts:[],areas:{},locpref:[],anywhere:false,
@@ -927,7 +927,7 @@ function applyLang(l){
   $$(".langsw button").forEach(b=>b.classList.toggle("on",b.dataset.lang===l));
   document.title = {ru:"Domifind — персональный поиск недвижимости на Кипре", el:"Domifind — Προσωπική αναζήτηση ακινήτων στην Κύπρο"}[l] || "Domifind — Your property search in Cyprus, done for you";
   const keepMin=$("#pmin").value, keepMax=$("#pmax").value;
-  fillPrices(); $("#pmin").value=keepMin; $("#pmax").value=keepMax;
+  fillPrices(); $("#pmin").value=keepMin; $("#pmax").value=keepMax; fixMin();
   renderAreas(); setNext(); update();
   try{localStorage.setItem("domifind-lang",l)}catch(e){}
 }
@@ -940,10 +940,20 @@ $$("#deal button").forEach(b=>b.onclick=()=>{
 });
 function fillPrices(){
   const vals = S.deal==="Buy"?BUY:RENT, suf = S.deal==="Rent"?" "+T("/month"):"";
-  $("#pmin").innerHTML = `<option value="">${T("No minimum")}</option>`+vals.map(v=>`<option value="${v}">${fmt(v)}${suf}</option>`).join("");
+  const noMin = S.deal==="Buy" ? "" : `<option value="">${T("No minimum")}</option>`;   /* buying: minimum is €100K */
+  $("#pmin").innerHTML = noMin+vals.map(v=>`<option value="${v}">${fmt(v)}${suf}</option>`).join("");
   $("#pmax").innerHTML = `<option value="">${T("No maximum")}</option>`+vals.map(v=>`<option value="${v}">${fmt(v)}${suf}</option>`).join("")+(S.deal==="Buy"?`<option value="99999999">€10M+</option>`:"");
   $("#budgetHint").textContent = T(S.deal==="Buy" ? "Your purchase budget in euros." : "Your monthly rent budget in euros.");
   $("#financeQ").style.display = S.deal==="Buy" ? "" : "none";
+  syncMax();
+}
+/* if a saved minimum no longer exists (e.g. €50K), fall back to the first option */
+function fixMin(){ if($("#pmin").selectedIndex<0) $("#pmin").selectedIndex=0; syncMax(); }
+/* the maximum can't be lower than the minimum */
+function syncMax(){
+  const min=+$("#pmin").value||0;
+  [...$("#pmax").options].forEach(o=>{ o.disabled = !!o.value && +o.value < min; });
+  if($("#pmax").value && +$("#pmax").value < min) $("#pmax").value="";
 }
 
 /* multi / single / tri chips */
@@ -990,6 +1000,7 @@ function renderAreas(){
 
 /* inputs */
 ["pmin","pmax","area","plot","near","nogo","notes","name","phone","email"].forEach(id=>$("#"+id).addEventListener("input",update));
+$("#pmin").addEventListener("input",()=>{syncMax();update()});
 $("#flex").onchange=update;
 
 /* Steps */
@@ -1127,7 +1138,7 @@ function load(){
     ["types","purpose","condition"].forEach(k=>{ if(Array.isArray(S[k])) S[k]=S[k].slice(0,1) });
     $$("#deal button").forEach(b=>b.classList.toggle("on",b.dataset.v===S.deal));
     fillPrices();
-    FIELDS.forEach(i=>{ if(d.f[i]!=null) $("#"+i).value=d.f[i] }); $("#flex").checked=!!d.flex; S.anywhere=false;
+    FIELDS.forEach(i=>{ if(d.f[i]!=null) $("#"+i).value=d.f[i] }); fixMin(); $("#flex").checked=!!d.flex; S.anywhere=false;
     $$("[data-multi]").forEach(g=>g.querySelectorAll("button").forEach(b=>b.classList.toggle("on",(S[g.dataset.multi]||[]).includes(b.dataset.v))));
     $$("[data-single]").forEach(g=>g.querySelectorAll("button").forEach(b=>b.classList.toggle("on",S[g.dataset.single]===b.dataset.v)));
     $$("[data-tri] button").forEach(b=>{const n=S.fac[b.dataset.v]||0;b.classList.toggle("on",n>0);b.classList.toggle("must",n===2)});
