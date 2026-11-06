@@ -185,6 +185,18 @@ textarea{min-height:96px;resize:vertical}
 .success .tick{width:74px;height:74px;border-radius:50%;background:#E2F4EC;color:#1F8A5B;font-size:2.2rem;display:grid;place-items:center;margin:0 auto 14px}
 .q.missing label.t,.q.missing .field-l{color:#C2412D}
 .missing-box{outline:2px solid #F3B9A3;outline-offset:6px;border-radius:12px}
+.modal{position:fixed;inset:0;background:rgba(14,59,74,.45);display:none;align-items:center;justify-content:center;z-index:200;padding:20px}
+.modal.show{display:flex;animation:fade .2s ease}
+.modal-box{background:#fff;border-radius:22px;padding:28px;max-width:420px;width:100%;box-shadow:var(--shadow)}
+.modal-box h3{font-size:1.4rem;margin-bottom:4px}
+.modal-box p{color:var(--muted);margin-bottom:18px;font-size:.95rem}
+.dlv-opts{display:grid;gap:10px}
+.dlv-opts button{border:1.5px solid var(--line);background:#fff;border-radius:14px;padding:14px 16px;font-weight:700;font-size:1rem;text-align:left;color:var(--ink)}
+.dlv-opts button:hover{border-color:var(--aqua)}
+.dlv-opts button.on{border-color:var(--terra);background:#FDF1EB;color:var(--terra2)}
+.modal-cancel{margin-top:14px;background:none;border:none;color:var(--muted);font-weight:600;text-decoration:underline}
+.dlv-note{display:none;margin-top:12px;font-size:.92rem;color:var(--sea2);font-weight:600}
+.dlv-note button{background:none;border:none;color:var(--terra);font-weight:700;text-decoration:underline;margin-left:6px}
 .err{color:#C2412D;font-size:.88rem;font-weight:600;margin-top:8px;display:none}
 
 /* WHY / FAQ */
@@ -403,6 +415,7 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px;
               <button class="chip" data-v="Resale">Resale</button>
               <button class="chip" data-v="To renovate">To renovate</button>
             </div>
+            <div class="dlv-note" id="dlvNote" data-dyn></div>
           </div>
           <div class="err" data-err="0" data-dyn></div>
         </div>
@@ -688,6 +701,7 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px;
   </div>
 </footer>
 
+<div class="modal" id="dlvModal" data-dyn></div>
 <div class="toast" id="toast" data-dyn></div>
 
 <script>
@@ -759,7 +773,7 @@ const RU = {
 "When do you want to move / buy?":"Когда планируете переезд / покупку?","ASAP":"Как можно скорее","1–3 months":"1–3 месяца","Within 1 month":"В течение месяца",
 "Preferred language":"Предпочтительный язык","Best way to reach you":"Как с вами лучше связаться","Phone call":"Звонок",
 "Are you currently in Cyprus?":"Вы сейчас на Кипре?","Yes, I live here":"Да, живу здесь","Abroad, relocating":"За границей, переезжаю","Buying remotely":"Покупаю удалённо",
-"Please choose at least one option for:":"Пожалуйста, выберите хотя бы один вариант:","Location":"Локация","Neighbourhood":"Район","Full name":"Имя и фамилия","Phone / WhatsApp":"Телефон / WhatsApp","Please add your name and phone so we can reach you.":"Укажите имя и телефон, чтобы мы могли с вами связаться.",
+"Please choose at least one option for:":"Пожалуйста, выберите хотя бы один вариант:","Location":"Локация","Maximum delivery time":"Максимальный срок сдачи","When should the property be ready at the latest?":"Когда объект должен быть готов самое позднее?","< 6 months":"< 6 месяцев","< 1 year":"< 1 года","< 2 years":"< 2 лет","Cancel":"Отмена","Delivery:":"Сдача:","Change":"Изменить","Neighbourhood":"Район","Full name":"Имя и фамилия","Phone / WhatsApp":"Телефон / WhatsApp","Please add your name and phone so we can reach you.":"Укажите имя и телефон, чтобы мы могли с вами связаться.",
 "Your brief is ready":"Ваша заявка готова","Check it below, then send it in one tap. We'll confirm within 24 hours and start searching.":"Проверьте заявку и отправьте в одно касание. Мы подтвердим в течение 24 часов и начнём поиск.",
 "💬 Send on WhatsApp":"💬 Отправить в WhatsApp","Fastest reply":"Самый быстрый ответ","✉️ Send by email":"✉️ Отправить по email","📋 Copy my brief":"📋 Скопировать заявку","Paste it anywhere":"Вставьте куда удобно",
 "← Back":"← Назад","Next →":"Далее →","Review my brief →":"Проверить заявку →",
@@ -850,7 +864,7 @@ const EL = {
 "When do you want to move / buy?":"Πότε θέλετε να μετακομίσετε / αγοράσετε;","ASAP":"Το συντομότερο","1–3 months":"1–3 μήνες","Within 1 month":"Μέσα σε 1 μήνα",
 "Preferred language":"Προτιμώμενη γλώσσα","Best way to reach you":"Πώς να επικοινωνήσουμε","Phone call":"Τηλεφωνικά",
 "Are you currently in Cyprus?":"Βρίσκεστε στην Κύπρο;","Yes, I live here":"Ναι, μένω εδώ","Abroad, relocating":"Στο εξωτερικό, μετακομίζω","Buying remotely":"Αγοράζω από απόσταση",
-"Please choose at least one option for:":"Παρακαλούμε επιλέξτε τουλάχιστον μία επιλογή για:","Location":"Τοποθεσία","Neighbourhood":"Περιοχή","Full name":"Ονοματεπώνυμο","Phone / WhatsApp":"Τηλέφωνο / WhatsApp","Please add your name and phone so we can reach you.":"Συμπληρώστε όνομα και τηλέφωνο για να επικοινωνήσουμε μαζί σας.",
+"Please choose at least one option for:":"Παρακαλούμε επιλέξτε τουλάχιστον μία επιλογή για:","Location":"Τοποθεσία","Maximum delivery time":"Μέγιστος χρόνος παράδοσης","When should the property be ready at the latest?":"Πότε πρέπει να είναι έτοιμο το ακίνητο το αργότερο;","< 6 months":"< 6 μήνες","< 1 year":"< 1 έτος","< 2 years":"< 2 έτη","Cancel":"Ακύρωση","Delivery:":"Παράδοση:","Change":"Αλλαγή","Neighbourhood":"Περιοχή","Full name":"Ονοματεπώνυμο","Phone / WhatsApp":"Τηλέφωνο / WhatsApp","Please add your name and phone so we can reach you.":"Συμπληρώστε όνομα και τηλέφωνο για να επικοινωνήσουμε μαζί σας.",
 "Your brief is ready":"Το αίτημά σας είναι έτοιμο","Check it below, then send it in one tap. We'll confirm within 24 hours and start searching.":"Ελέγξτε το και στείλτε το με ένα πάτημα. Θα επιβεβαιώσουμε μέσα σε 24 ώρες και ξεκινάμε την αναζήτηση.",
 "💬 Send on WhatsApp":"💬 Αποστολή στο WhatsApp","Fastest reply":"Η πιο γρήγορη απάντηση","✉️ Send by email":"✉️ Αποστολή με email","📋 Copy my brief":"📋 Αντιγραφή αιτήματος","Paste it anywhere":"Επικολλήστε το όπου θέλετε",
 "← Back":"← Πίσω","Next →":"Επόμενο →","Review my brief →":"Έλεγχος αιτήματος →",
@@ -901,7 +915,7 @@ Object.assign(RU,{"Old Port / Marina":"Старый порт / Марина","Li
 const BUY = [100,150,200,250,300,400,500,600,750,1000,1500,2000,3000,5000,10000].map(k=>k*1000);
 const RENT = [500,750,1000,1250,1500,2000,2500,3000,4000,5000,7500,10000];
 
-const S = {deal:"Buy",types:[],purpose:[],condition:[],districts:[],areas:{},locpref:[],anywhere:false,
+const S = {deal:"Buy",types:[],purpose:[],condition:[],districts:[],areas:{},locpref:[],anywhere:false,delivery:"",
   finance:"",beds:"",baths:"",fac:{},when:"",lang:[],contact:"",incy:""};
 let step = 0;
 
@@ -928,7 +942,7 @@ function applyLang(l){
   document.title = {ru:"Domifind — персональный поиск недвижимости на Кипре", el:"Domifind — Προσωπική αναζήτηση ακινήτων στην Κύπρο"}[l] || "Domifind — Your property search in Cyprus, done for you";
   const keepMin=$("#pmin").value, keepMax=$("#pmax").value;
   fillPrices(); $("#pmin").value=keepMin; $("#pmax").value=keepMax; fixMin();
-  renderAreas(); setNext(); update();
+  renderAreas(); renderDlv(); setNext(); update();
   try{localStorage.setItem("domifind-lang",l)}catch(e){}
 }
 $$(".langsw button").forEach(b=>b.onclick=()=>applyLang(b.dataset.lang));
@@ -962,7 +976,9 @@ $$("[data-multi]").forEach(g=>g.querySelectorAll("button").forEach(b=>b.onclick=
   const k=g.dataset.multi;
   if(ONE_ONLY.includes(k) && !b.classList.contains("on")) g.querySelectorAll("button").forEach(x=>x.classList.remove("on"));
   b.classList.toggle("on");
-  S[k] = [...g.querySelectorAll(".on")].map(x=>x.dataset.v); update();
+  S[k] = [...g.querySelectorAll(".on")].map(x=>x.dataset.v);
+  if(k==="condition") onCondition();
+  update();
 }));
 $$("[data-single]").forEach(g=>g.querySelectorAll("button").forEach(b=>b.onclick=()=>{
   const k=g.dataset.single, was=b.classList.contains("on");
@@ -1005,6 +1021,42 @@ $("#flex").onchange=update;
 
 /* Steps */
 function setNext(){ $("#next").textContent = T(step===4?"Review my brief →":"Next →") }
+/* Off-plan: ask for the maximum delivery time in a popup */
+const OFFPLAN="Off-plan / under construction";
+const DELIVERY=["< 6 months","< 1 year","< 2 years"];
+const esc = t => t.replace(/</g,"&lt;");
+function onCondition(){
+  if(S.condition.includes(OFFPLAN)){ if(!S.delivery) openDelivery(); }
+  else S.delivery="";
+  renderDlv();
+}
+function closeDelivery(cancelled){
+  $("#dlvModal").classList.remove("show");
+  if(cancelled && !S.delivery){   /* no delivery time chosen: undo the Off-plan choice */
+    S.condition=[]; $$('[data-multi="condition"] button').forEach(x=>x.classList.remove("on"));
+  }
+  renderDlv(); update();
+}
+function openDelivery(){
+  const m=$("#dlvModal");
+  m.innerHTML=`<div class="modal-box" role="dialog" aria-modal="true">
+    <h3>${T("Maximum delivery time")}</h3><p>${T("When should the property be ready at the latest?")}</p>
+    <div class="dlv-opts">${DELIVERY.map(d=>`<button type="button" data-d="${d}" class="${S.delivery===d?"on":""}">${esc(T(d))}</button>`).join("")}</div>
+    <button type="button" class="modal-cancel">${T("Cancel")}</button></div>`;
+  m.classList.add("show");
+  m.querySelectorAll(".dlv-opts button").forEach(b=>b.onclick=()=>{ S.delivery=b.dataset.d; closeDelivery(false); });
+  m.querySelector(".modal-cancel").onclick=()=>closeDelivery(true);
+  m.onclick=e=>{ if(e.target===m) closeDelivery(true); };
+}
+document.addEventListener("keydown",e=>{ if(e.key==="Escape" && $("#dlvModal").classList.contains("show")) closeDelivery(true); });
+function renderDlv(){
+  const n=$("#dlvNote");
+  if(S.condition.includes(OFFPLAN) && S.delivery){
+    n.innerHTML=`${T("Delivery:")} <b>${esc(T(S.delivery))}</b> <button type="button">${T("Change")}</button>`;
+    n.querySelector("button").onclick=openDelivery; n.style.display="block";
+  } else { n.innerHTML=""; n.style.display="none"; }
+}
+
 /* Every multiple-choice question needs at least one answer; free-text boxes stay optional */
 const chipsQ = sel => { const g=$(sel); return {q:g.closest(".q"), box:g}; };
 const fieldQ = sel => { const q=$(sel).closest(".q"); return {q, box:q}; };
@@ -1012,7 +1064,8 @@ const triOK = i => [...$$("[data-tri]")[i].querySelectorAll("button")].some(b=>S
 const REQ = {
   0: [["Property type",()=>S.types.length,()=>chipsQ('[data-multi="types"]')],
       ["Purpose",()=>S.purpose.length,()=>chipsQ('[data-multi="purpose"]')],
-      ["Condition",()=>S.condition.length,()=>chipsQ('[data-multi="condition"]')]],
+      ["Condition",()=>S.condition.length,()=>chipsQ('[data-multi="condition"]')],
+      ["Maximum delivery time",()=>!S.condition.includes(OFFPLAN)||S.delivery,()=>chipsQ('[data-multi="condition"]')]],
   1: [["Location",()=>S.districts.length,()=>({q:null,box:$(".cymap")})],
       ["Neighbourhood",()=>!S.districts.length||S.districts.every(d=>S.areas[d]&&S.areas[d].length),()=>({q:null,box:$("#areas")})],
       ["Location preferences",()=>S.locpref.length,()=>chipsQ('[data-multi="locpref"]')]],
@@ -1106,7 +1159,7 @@ function briefText(){
   add("Name",$("#name").value.trim()); add("Phone",$("#phone").value.trim()); add("Email",$("#email").value.trim());
   add("Contact by",S.contact); add("Language",S.lang); add("Situation",S.incy); add("Timing",S.when);
   L.push("");
-  add("Looking to",S.deal); add("Property type",S.types); add("Purpose",S.purpose); add("Condition",S.condition);
+  add("Looking to",S.deal); add("Property type",S.types); add("Purpose",S.purpose); add("Condition",S.condition); if(S.condition.includes(OFFPLAN)) add("Max delivery time",S.delivery);
   L.push(""); add("📍 Location",whereText()); add("Location preferences",S.locpref); add("Must be close to",$("#near").value.trim());
   L.push(""); add("💶 Budget",budgetText()); if(S.deal==="Buy") add("Financing",S.finance);
   add("Size",sizeText());
@@ -1142,7 +1195,7 @@ function load(){
     $$("[data-multi]").forEach(g=>g.querySelectorAll("button").forEach(b=>b.classList.toggle("on",(S[g.dataset.multi]||[]).includes(b.dataset.v))));
     $$("[data-single]").forEach(g=>g.querySelectorAll("button").forEach(b=>b.classList.toggle("on",S[g.dataset.single]===b.dataset.v)));
     $$("[data-tri] button").forEach(b=>{const n=S.fac[b.dataset.v]||0;b.classList.toggle("on",n>0);b.classList.toggle("must",n===2)});
-    renderMap();
+    renderMap(); renderDlv();
   }catch(e){}
 }
 
