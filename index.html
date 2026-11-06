@@ -370,7 +370,7 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px;
             </div>
           </div>
           <div class="q">
-            <label class="t">Property type <small>(choose one or more)</small></label>
+            <label class="t">Property type <small>(choose one)</small></label>
             <div class="tiles" data-multi="types">
               <button class="tile" data-v="Apartment"><span class="ic">🏢</span>Apartment</button>
               <button class="tile" data-v="Penthouse"><span class="ic">🌇</span>Penthouse</button>
@@ -735,7 +735,7 @@ const RU = {
 "Be as precise or as open as you like. The more we know, the better your shortlist.":"Можно подробно, можно в общих чертах. Чем больше мы знаем, тем точнее подборка.",
 "1 · Property":"1 · Объект","2 · Location":"2 · Локация","3 · Budget & size":"3 · Бюджет и площадь","4 · Must-haves":"4 · Пожелания","5 · About you":"5 · О вас","6 · Send":"6 · Отправка",
 "What are you looking for?":"Что вы ищете?","Start with the basics.":"Начнём с главного.","I want to":"Я хочу","Buy":"Купить","Rent":"Арендовать",
-"Property type":"Тип объекта","(choose one or more)":"(можно несколько)",
+"Property type":"Тип объекта","(choose one)":"(выберите один вариант)",
 "Apartment":"Квартира","Penthouse":"Пентхаус","House":"Дом","Villa":"Вилла","Townhouse":"Таунхаус","Studio":"Студия","Plot / Land":"Участок / земля","Office":"Офис","Shop":"Магазин","Whole building":"Здание целиком","Building":"Здание целиком",
 "Purpose":"Цель","Main home":"Основное жильё","Holiday home":"Дом для отдыха","Investment / rental income":"Инвестиция / доход от аренды","Relocation for work":"Переезд по работе","Residency / permit":"ВНЖ / резидентство","Business premises":"Коммерческое помещение",
 "Condition":"Состояние","New build":"Новостройка","Off-plan":"На стадии строительства","Off-plan / under construction":"На стадии строительства","Resale":"Вторичное жильё","To renovate":"Под ремонт","Any":"Любое","Any condition":"Любое",
@@ -826,7 +826,7 @@ const EL = {
 "Be as precise or as open as you like. The more we know, the better your shortlist.":"Όσο συγκεκριμένα ή γενικά θέλετε. Όσο περισσότερα γνωρίζουμε, τόσο καλύτερες οι επιλογές.",
 "1 · Property":"1 · Ακίνητο","2 · Location":"2 · Τοποθεσία","3 · Budget & size":"3 · Τιμή & εμβαδόν","4 · Must-haves":"4 · Παροχές","5 · About you":"5 · Στοιχεία","6 · Send":"6 · Αποστολή",
 "What are you looking for?":"Τι ψάχνετε;","Start with the basics.":"Ας ξεκινήσουμε από τα βασικά.","I want to":"Θέλω να","Buy":"Αγοράσω","Rent":"Ενοικιάσω",
-"Property type":"Τύπος ακινήτου","(choose one or more)":"(ένα ή περισσότερα)",
+"Property type":"Τύπος ακινήτου","(choose one)":"(επιλέξτε ένα)",
 "Apartment":"Διαμέρισμα","Penthouse":"Ρετιρέ","House":"Σπίτι","Villa":"Βίλα","Townhouse":"Μεζονέτα","Studio":"Στούντιο","Plot / Land":"Οικόπεδο / χωράφι","Office":"Γραφείο","Shop":"Κατάστημα","Whole building":"Ολόκληρο κτίριο","Building":"Ολόκληρο κτίριο",
 "Purpose":"Σκοπός","Main home":"Κύρια κατοικία","Holiday home":"Εξοχική κατοικία","Investment / rental income":"Επένδυση / εισόδημα από ενοίκιο","Relocation for work":"Μετεγκατάσταση για δουλειά","Residency / permit":"Άδεια διαμονής","Business premises":"Επαγγελματικός χώρος",
 "Condition":"Κατάσταση","New build":"Καινούργιο","Off-plan":"Υπό κατασκευή","Off-plan / under construction":"Υπό κατασκευή","Resale":"Μεταπώληση","To renovate":"Για ανακαίνιση","Any":"Οποιαδήποτε","Any condition":"Οποιαδήποτε",
@@ -950,8 +950,11 @@ function fillPrices(){
 }
 
 /* multi / single / tri chips */
+const ONE_ONLY=["types","purpose","condition"];   /* only one choice allowed in these questions */
 $$("[data-multi]").forEach(g=>g.querySelectorAll("button").forEach(b=>b.onclick=()=>{
-  const k=g.dataset.multi; b.classList.toggle("on");
+  const k=g.dataset.multi;
+  if(ONE_ONLY.includes(k) && !b.classList.contains("on")) g.querySelectorAll("button").forEach(x=>x.classList.remove("on"));
+  b.classList.toggle("on");
   S[k] = [...g.querySelectorAll(".on")].map(x=>x.dataset.v); update();
 }));
 $$("[data-single]").forEach(g=>g.querySelectorAll("button").forEach(b=>b.onclick=()=>{
@@ -1125,6 +1128,7 @@ function load(){
   try{
     const d=JSON.parse(localStorage.getItem("domifind-draft")||"null"); if(!d) return;
     Object.assign(S,d.S);
+    ["types","purpose","condition"].forEach(k=>{ if(Array.isArray(S[k])) S[k]=S[k].slice(0,1) });
     $$("#deal button").forEach(b=>b.classList.toggle("on",b.dataset.v===S.deal));
     fillPrices();
     FIELDS.forEach(i=>{ if(d.f[i]!=null) $("#"+i).value=d.f[i] }); $("#flex").checked=!!d.flex; $("#anywhere").checked=!!S.anywhere;
