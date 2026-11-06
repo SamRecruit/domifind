@@ -757,7 +757,7 @@ const RU = {
 "Must be close to…":"Должно быть рядом с…","(office, school, family. Optional)":"(офис, школа, семья. Необязательно)",
 "e.g. Max 15 min drive from my office at the Limassol Marina":"например: не более 15 минут на машине до офиса у Limassol Marina",
 "Budget & size":"Бюджет и площадь","Your purchase budget in euros.":"Ваш бюджет на покупку в евро.","Your monthly rent budget in euros.":"Ваш бюджет на аренду в месяц, в евро.",
-"Minimum":"Минимум","Maximum":"Максимум","No minimum":"Без минимума","No maximum":"Без максимума",
+"Minimum":"Минимум","Maximum":"Максимум","No minimum":"Без минимума","Select minimum":"Выберите минимум","No maximum":"Без максимума",
 "I can stretch ~10% for the right property":"Могу добавить ~10% за подходящий объект",
 "Financing":"Финансирование","Cash":"Наличные","Mortgage approved":"Ипотека одобрена","Need mortgage help":"Нужна помощь с ипотекой","Not sure yet":"Пока не знаю",
 "Bedrooms":"Спальни","Bathrooms":"Ванные","Min. covered area (m²)":"Мин. крытая площадь (м²)","e.g. 120":"например, 120","Min. plot / garden (m²)":"Мин. участок / сад (м²)","optional":"необязательно",
@@ -848,7 +848,7 @@ const EL = {
 "Must be close to…":"Να είναι κοντά σε…","(office, school, family. Optional)":"(γραφείο, σχολείο, οικογένεια. Προαιρετικό)",
 "e.g. Max 15 min drive from my office at the Limassol Marina":"π.χ. Μέχρι 15 λεπτά με το αυτοκίνητο από το γραφείο μου στη Μαρίνα Λεμεσού",
 "Budget & size":"Προϋπολογισμός & εμβαδόν","Your purchase budget in euros.":"Ο προϋπολογισμός αγοράς σε ευρώ.","Your monthly rent budget in euros.":"Το μηνιαίο ενοίκιο που μπορείτε να διαθέσετε, σε ευρώ.",
-"Minimum":"Ελάχιστο","Maximum":"Μέγιστο","No minimum":"Χωρίς ελάχιστο","No maximum":"Χωρίς μέγιστο",
+"Minimum":"Ελάχιστο","Maximum":"Μέγιστο","No minimum":"Χωρίς ελάχιστο","Select minimum":"Επιλέξτε ελάχιστο","No maximum":"Χωρίς μέγιστο",
 "I can stretch ~10% for the right property":"Μπορώ να αυξήσω ~10% για το σωστό ακίνητο",
 "Financing":"Χρηματοδότηση","Cash":"Μετρητά","Mortgage approved":"Εγκεκριμένο δάνειο","Need mortgage help":"Χρειάζομαι βοήθεια με δάνειο","Not sure yet":"Δεν ξέρω ακόμα",
 "Bedrooms":"Υπνοδωμάτια","Bathrooms":"Μπάνια","Min. covered area (m²)":"Ελάχ. καλυμμένο εμβαδόν (m²)","e.g. 120":"π.χ. 120","Min. plot / garden (m²)":"Ελάχ. οικόπεδο / κήπος (m²)","optional":"προαιρετικό",
@@ -955,7 +955,8 @@ $$("#deal button").forEach(b=>b.onclick=()=>{
 });
 function fillPrices(){
   const vals = S.deal==="Buy"?BUY:RENT, suf = S.deal==="Rent"?" "+T("/month"):"";
-  const noMin = S.deal==="Buy" ? "" : `<option value="">${T("No minimum")}</option>`;   /* buying: minimum is €100K */
+  /* buying: a "Select minimum" placeholder shows until the client opens the list (amounts start at €100K) */
+  const noMin = S.deal==="Buy" ? `<option value="" disabled selected hidden>${T("Select minimum")}</option>` : `<option value="">${T("No minimum")}</option>`;
   $("#pmin").innerHTML = noMin+vals.map(v=>`<option value="${v}">${fmt(v)}${suf}</option>`).join("");
   $("#pmax").innerHTML = `<option value="">${T("No maximum")}</option>`+vals.map(v=>`<option value="${v}">${fmt(v)}${suf}</option>`).join("")+(S.deal==="Buy"?`<option value="99999999">€10M+</option>`:"");
   $("#budgetHint").textContent = T(S.deal==="Buy" ? "Your purchase budget in euros." : "Your monthly rent budget in euros.");
