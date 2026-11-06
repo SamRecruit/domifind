@@ -759,7 +759,7 @@ const RU = {
 "When do you want to move / buy?":"Когда планируете переезд / покупку?","ASAP":"Как можно скорее","1–3 months":"1–3 месяца","Within 1 month":"В течение месяца",
 "Preferred language":"Предпочтительный язык","Best way to reach you":"Как с вами лучше связаться","Phone call":"Звонок",
 "Are you currently in Cyprus?":"Вы сейчас на Кипре?","Yes, I live here":"Да, живу здесь","Abroad, relocating":"За границей, переезжаю","Buying remotely":"Покупаю удалённо",
-"Please choose at least one option for:":"Пожалуйста, выберите хотя бы один вариант:","Location":"Локация","Full name":"Имя и фамилия","Phone / WhatsApp":"Телефон / WhatsApp","Please add your name and phone so we can reach you.":"Укажите имя и телефон, чтобы мы могли с вами связаться.",
+"Please choose at least one option for:":"Пожалуйста, выберите хотя бы один вариант:","Location":"Локация","Neighbourhood":"Район","Full name":"Имя и фамилия","Phone / WhatsApp":"Телефон / WhatsApp","Please add your name and phone so we can reach you.":"Укажите имя и телефон, чтобы мы могли с вами связаться.",
 "Your brief is ready":"Ваша заявка готова","Check it below, then send it in one tap. We'll confirm within 24 hours and start searching.":"Проверьте заявку и отправьте в одно касание. Мы подтвердим в течение 24 часов и начнём поиск.",
 "💬 Send on WhatsApp":"💬 Отправить в WhatsApp","Fastest reply":"Самый быстрый ответ","✉️ Send by email":"✉️ Отправить по email","📋 Copy my brief":"📋 Скопировать заявку","Paste it anywhere":"Вставьте куда удобно",
 "← Back":"← Назад","Next →":"Далее →","Review my brief →":"Проверить заявку →",
@@ -850,7 +850,7 @@ const EL = {
 "When do you want to move / buy?":"Πότε θέλετε να μετακομίσετε / αγοράσετε;","ASAP":"Το συντομότερο","1–3 months":"1–3 μήνες","Within 1 month":"Μέσα σε 1 μήνα",
 "Preferred language":"Προτιμώμενη γλώσσα","Best way to reach you":"Πώς να επικοινωνήσουμε","Phone call":"Τηλεφωνικά",
 "Are you currently in Cyprus?":"Βρίσκεστε στην Κύπρο;","Yes, I live here":"Ναι, μένω εδώ","Abroad, relocating":"Στο εξωτερικό, μετακομίζω","Buying remotely":"Αγοράζω από απόσταση",
-"Please choose at least one option for:":"Παρακαλούμε επιλέξτε τουλάχιστον μία επιλογή για:","Location":"Τοποθεσία","Full name":"Ονοματεπώνυμο","Phone / WhatsApp":"Τηλέφωνο / WhatsApp","Please add your name and phone so we can reach you.":"Συμπληρώστε όνομα και τηλέφωνο για να επικοινωνήσουμε μαζί σας.",
+"Please choose at least one option for:":"Παρακαλούμε επιλέξτε τουλάχιστον μία επιλογή για:","Location":"Τοποθεσία","Neighbourhood":"Περιοχή","Full name":"Ονοματεπώνυμο","Phone / WhatsApp":"Τηλέφωνο / WhatsApp","Please add your name and phone so we can reach you.":"Συμπληρώστε όνομα και τηλέφωνο για να επικοινωνήσουμε μαζί σας.",
 "Your brief is ready":"Το αίτημά σας είναι έτοιμο","Check it below, then send it in one tap. We'll confirm within 24 hours and start searching.":"Ελέγξτε το και στείλτε το με ένα πάτημα. Θα επιβεβαιώσουμε μέσα σε 24 ώρες και ξεκινάμε την αναζήτηση.",
 "💬 Send on WhatsApp":"💬 Αποστολή στο WhatsApp","Fastest reply":"Η πιο γρήγορη απάντηση","✉️ Send by email":"✉️ Αποστολή με email","📋 Copy my brief":"📋 Αντιγραφή αιτήματος","Paste it anywhere":"Επικολλήστε το όπου θέλετε",
 "← Back":"← Πίσω","Next →":"Επόμενο →","Review my brief →":"Έλεγχος αιτήματος →",
@@ -979,7 +979,6 @@ function renderAreas(){
   const box=$("#areas");
   if(!S.districts.length){box.innerHTML=`<div class="empty">${T("👈 Select a district on the map to see its neighbourhoods.")}</div>`;return}
   box.innerHTML = S.districts.map(d=>`<div class="area-group"><h4>${T(d)}</h4><div class="chips">
-    <button class="chip ${S.areas[d].length===0?'on':''}" data-d="${d}" data-a="*">${T("Anywhere in")} ${T(d)}</button>
     ${AREAS[d].map(a=>`<button class="chip ${S.areas[d].includes(a)?'on':''}" data-d="${d}" data-a="${a}">${T(a)}</button>`).join("")}
   </div></div>`).join("");
   box.querySelectorAll("button").forEach(b=>b.onclick=()=>{
@@ -1004,6 +1003,7 @@ const REQ = {
       ["Purpose",()=>S.purpose.length,()=>chipsQ('[data-multi="purpose"]')],
       ["Condition",()=>S.condition.length,()=>chipsQ('[data-multi="condition"]')]],
   1: [["Location",()=>S.districts.length,()=>({q:null,box:$(".cymap")})],
+      ["Neighbourhood",()=>!S.districts.length||S.districts.every(d=>S.areas[d]&&S.areas[d].length),()=>({q:null,box:$("#areas")})],
       ["Location preferences",()=>S.locpref.length,()=>chipsQ('[data-multi="locpref"]')]],
   2: [["Budget",()=>$("#pmin").value||$("#pmax").value,()=>fieldQ("#pmin")],
       ["Financing",()=>S.deal!=="Buy"||S.finance,()=>chipsQ('[data-single="finance"]')],
