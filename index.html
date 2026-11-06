@@ -194,6 +194,7 @@ textarea{min-height:96px;resize:vertical}
 .dlv-opts button{border:1.5px solid var(--line);background:#fff;border-radius:14px;padding:14px 16px;font-weight:700;font-size:1rem;text-align:left;color:var(--ink)}
 .dlv-opts button:hover{border-color:var(--aqua)}
 .dlv-opts button.on{border-color:var(--terra);background:#FDF1EB;color:var(--terra2)}
+.req-pill{display:inline-block;background:#FDECE8;color:#C2412D;font-size:.75rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:4px 10px;border-radius:99px;margin-bottom:10px}
 .modal-cancel{margin-top:14px;background:none;border:none;color:var(--muted);font-weight:600;text-decoration:underline}
 .dlv-note{display:none;margin-top:12px;font-size:.92rem;color:var(--sea2);font-weight:600}
 .dlv-note button{background:none;border:none;color:var(--terra);font-weight:700;text-decoration:underline;margin-left:6px}
@@ -773,7 +774,7 @@ const RU = {
 "When do you want to move / buy?":"Когда планируете переезд / покупку?","ASAP":"Как можно скорее","1–3 months":"1–3 месяца","Within 1 month":"В течение месяца",
 "Preferred language":"Предпочтительный язык","Best way to reach you":"Как с вами лучше связаться","Phone call":"Звонок",
 "Are you currently in Cyprus?":"Вы сейчас на Кипре?","Yes, I live here":"Да, живу здесь","Abroad, relocating":"За границей, переезжаю","Buying remotely":"Покупаю удалённо",
-"Please choose at least one option for:":"Пожалуйста, выберите хотя бы один вариант:","Location":"Локация","Maximum delivery time":"Максимальный срок сдачи","When should the property be ready at the latest?":"Когда объект должен быть готов самое позднее?","< 6 months":"< 6 месяцев","< 1 year":"< 1 года","< 2 years":"< 2 лет","Cancel":"Отмена","Delivery:":"Сдача:","Change":"Изменить","Neighbourhood":"Район","Full name":"Имя и фамилия","Phone / WhatsApp":"Телефон / WhatsApp","Please add your name and phone so we can reach you.":"Укажите имя и телефон, чтобы мы могли с вами связаться.",
+"Please choose at least one option for:":"Пожалуйста, выберите хотя бы один вариант:","Location":"Локация","Maximum delivery time":"Максимальный срок сдачи","When should the property be ready at the latest?":"Когда объект должен быть готов самое позднее?","< 6 months":"< 6 месяцев","< 1 year":"< 1 года","< 2 years":"< 2 лет","Required":"Обязательно","Required for off-plan properties: when must it be ready at the latest?":"Обязательно для строящихся объектов: когда он должен быть готов самое позднее?","← Choose another condition":"← Выбрать другое состояние","Delivery:":"Сдача:","Change":"Изменить","Neighbourhood":"Район","Full name":"Имя и фамилия","Phone / WhatsApp":"Телефон / WhatsApp","Please add your name and phone so we can reach you.":"Укажите имя и телефон, чтобы мы могли с вами связаться.",
 "Your brief is ready":"Ваша заявка готова","Check it below, then send it in one tap. We'll confirm within 24 hours and start searching.":"Проверьте заявку и отправьте в одно касание. Мы подтвердим в течение 24 часов и начнём поиск.",
 "💬 Send on WhatsApp":"💬 Отправить в WhatsApp","Fastest reply":"Самый быстрый ответ","✉️ Send by email":"✉️ Отправить по email","📋 Copy my brief":"📋 Скопировать заявку","Paste it anywhere":"Вставьте куда удобно",
 "← Back":"← Назад","Next →":"Далее →","Review my brief →":"Проверить заявку →",
@@ -864,7 +865,7 @@ const EL = {
 "When do you want to move / buy?":"Πότε θέλετε να μετακομίσετε / αγοράσετε;","ASAP":"Το συντομότερο","1–3 months":"1–3 μήνες","Within 1 month":"Μέσα σε 1 μήνα",
 "Preferred language":"Προτιμώμενη γλώσσα","Best way to reach you":"Πώς να επικοινωνήσουμε","Phone call":"Τηλεφωνικά",
 "Are you currently in Cyprus?":"Βρίσκεστε στην Κύπρο;","Yes, I live here":"Ναι, μένω εδώ","Abroad, relocating":"Στο εξωτερικό, μετακομίζω","Buying remotely":"Αγοράζω από απόσταση",
-"Please choose at least one option for:":"Παρακαλούμε επιλέξτε τουλάχιστον μία επιλογή για:","Location":"Τοποθεσία","Maximum delivery time":"Μέγιστος χρόνος παράδοσης","When should the property be ready at the latest?":"Πότε πρέπει να είναι έτοιμο το ακίνητο το αργότερο;","< 6 months":"< 6 μήνες","< 1 year":"< 1 έτος","< 2 years":"< 2 έτη","Cancel":"Ακύρωση","Delivery:":"Παράδοση:","Change":"Αλλαγή","Neighbourhood":"Περιοχή","Full name":"Ονοματεπώνυμο","Phone / WhatsApp":"Τηλέφωνο / WhatsApp","Please add your name and phone so we can reach you.":"Συμπληρώστε όνομα και τηλέφωνο για να επικοινωνήσουμε μαζί σας.",
+"Please choose at least one option for:":"Παρακαλούμε επιλέξτε τουλάχιστον μία επιλογή για:","Location":"Τοποθεσία","Maximum delivery time":"Μέγιστος χρόνος παράδοσης","When should the property be ready at the latest?":"Πότε πρέπει να είναι έτοιμο το ακίνητο το αργότερο;","< 6 months":"< 6 μήνες","< 1 year":"< 1 έτος","< 2 years":"< 2 έτη","Required":"Υποχρεωτικό","Required for off-plan properties: when must it be ready at the latest?":"Υποχρεωτικό για ακίνητα υπό κατασκευή: πότε πρέπει να είναι έτοιμο το αργότερο;","← Choose another condition":"← Επιλογή άλλης κατάστασης","Delivery:":"Παράδοση:","Change":"Αλλαγή","Neighbourhood":"Περιοχή","Full name":"Ονοματεπώνυμο","Phone / WhatsApp":"Τηλέφωνο / WhatsApp","Please add your name and phone so we can reach you.":"Συμπληρώστε όνομα και τηλέφωνο για να επικοινωνήσουμε μαζί σας.",
 "Your brief is ready":"Το αίτημά σας είναι έτοιμο","Check it below, then send it in one tap. We'll confirm within 24 hours and start searching.":"Ελέγξτε το και στείλτε το με ένα πάτημα. Θα επιβεβαιώσουμε μέσα σε 24 ώρες και ξεκινάμε την αναζήτηση.",
 "💬 Send on WhatsApp":"💬 Αποστολή στο WhatsApp","Fastest reply":"Η πιο γρήγορη απάντηση","✉️ Send by email":"✉️ Αποστολή με email","📋 Copy my brief":"📋 Αντιγραφή αιτήματος","Paste it anywhere":"Επικολλήστε το όπου θέλετε",
 "← Back":"← Πίσω","Next →":"Επόμενο →","Review my brief →":"Έλεγχος αιτήματος →",
@@ -1040,13 +1041,14 @@ function closeDelivery(cancelled){
 function openDelivery(){
   const m=$("#dlvModal");
   m.innerHTML=`<div class="modal-box" role="dialog" aria-modal="true">
-    <h3>${T("Maximum delivery time")}</h3><p>${T("When should the property be ready at the latest?")}</p>
+    <span class="req-pill">${T("Required")}</span>
+    <h3>${T("Maximum delivery time")}</h3><p>${T("Required for off-plan properties: when must it be ready at the latest?")}</p>
     <div class="dlv-opts">${DELIVERY.map(d=>`<button type="button" data-d="${d}" class="${S.delivery===d?"on":""}">${esc(T(d))}</button>`).join("")}</div>
-    <button type="button" class="modal-cancel">${T("Cancel")}</button></div>`;
+    <button type="button" class="modal-cancel">${T("← Choose another condition")}</button></div>`;
   m.classList.add("show");
   m.querySelectorAll(".dlv-opts button").forEach(b=>b.onclick=()=>{ S.delivery=b.dataset.d; closeDelivery(false); });
   m.querySelector(".modal-cancel").onclick=()=>closeDelivery(true);
-  m.onclick=e=>{ if(e.target===m) closeDelivery(true); };
+  m.onclick=null;   /* clicking outside does not close it: an answer is required */
 }
 document.addEventListener("keydown",e=>{ if(e.key==="Escape" && $("#dlvModal").classList.contains("show")) closeDelivery(true); });
 function renderDlv(){
