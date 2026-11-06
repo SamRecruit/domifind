@@ -183,8 +183,8 @@ textarea{min-height:96px;resize:vertical}
 .send.cp{background:#fff;color:var(--sea);border:1.5px solid var(--sea)}
 .success{display:none;text-align:center;padding:30px 10px}
 .success .tick{width:74px;height:74px;border-radius:50%;background:#E2F4EC;color:#1F8A5B;font-size:2.2rem;display:grid;place-items:center;margin:0 auto 14px}
-.q.missing label.t{color:#C2412D}
-.q.missing .tiles,.q.missing .chips{outline:2px solid #F3B9A3;outline-offset:6px;border-radius:12px}
+.q.missing label.t,.q.missing .field-l{color:#C2412D}
+.missing-box{outline:2px solid #F3B9A3;outline-offset:6px;border-radius:12px}
 .err{color:#C2412D;font-size:.88rem;font-weight:600;margin-top:8px;display:none}
 
 /* WHY / FAQ */
@@ -402,10 +402,9 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px;
               <button class="chip" data-v="Off-plan / under construction">Off-plan</button>
               <button class="chip" data-v="Resale">Resale</button>
               <button class="chip" data-v="To renovate">To renovate</button>
-              <button class="chip" data-v="Any condition">Any</button>
             </div>
           </div>
-          <div class="err" id="err0" data-dyn></div>
+          <div class="err" data-err="0" data-dyn></div>
         </div>
 
         <!-- STEP 2 -->
@@ -454,6 +453,7 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px;
             <label class="t">Must be close to… <small>(office, school, family. Optional)</small></label>
             <input type="text" id="near" placeholder="e.g. Max 15 min drive from my office at the Limassol Marina">
           </div>
+          <div class="err" data-err="1" data-dyn></div>
         </div>
 
         <!-- STEP 3 -->
@@ -499,6 +499,7 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px;
             <div><span class="field-l">Min. covered area (m²)</span><input type="number" id="area" placeholder="e.g. 120" min="0"></div>
             <div><span class="field-l">Min. plot / garden (m²)</span><input type="number" id="plot" placeholder="optional" min="0"></div>
           </div>
+          <div class="err" data-err="2" data-dyn></div>
         </div>
 
         <!-- STEP 4 -->
@@ -555,6 +556,7 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px;
             <label class="t">Anything else? <small>Your dream, in your own words</small></label>
             <textarea id="notes" placeholder="e.g. Bright, modern, open-plan kitchen, a quiet street where kids can play, 10 min from the Old Port…"></textarea>
           </div>
+          <div class="err" data-err="3" data-dyn></div>
         </div>
 
         <!-- STEP 5 -->
@@ -601,7 +603,7 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px;
               <button class="chip" data-v="Abroad, buying remotely">Buying remotely</button>
             </div>
           </div>
-          <div class="err" id="err">Please add your name and phone so we can reach you.</div>
+          <div class="err" data-err="4" data-dyn></div>
         </div>
 
         <!-- STEP 6 -->
@@ -760,7 +762,7 @@ const RU = {
 "When do you want to move / buy?":"Когда планируете переезд / покупку?","ASAP":"Как можно скорее","1–3 months":"1–3 месяца","Within 1 month":"В течение месяца",
 "Preferred language":"Предпочтительный язык","Best way to reach you":"Как с вами лучше связаться","Phone call":"Звонок",
 "Are you currently in Cyprus?":"Вы сейчас на Кипре?","Yes, I live here":"Да, живу здесь","Abroad, relocating":"За границей, переезжаю","Buying remotely":"Покупаю удалённо",
-"Please choose at least one option for:":"Пожалуйста, выберите хотя бы один вариант:","Please add your name and phone so we can reach you.":"Укажите имя и телефон, чтобы мы могли с вами связаться.",
+"Please choose at least one option for:":"Пожалуйста, выберите хотя бы один вариант:","Location":"Локация","Full name":"Имя и фамилия","Phone / WhatsApp":"Телефон / WhatsApp","Please add your name and phone so we can reach you.":"Укажите имя и телефон, чтобы мы могли с вами связаться.",
 "Your brief is ready":"Ваша заявка готова","Check it below, then send it in one tap. We'll confirm within 24 hours and start searching.":"Проверьте заявку и отправьте в одно касание. Мы подтвердим в течение 24 часов и начнём поиск.",
 "💬 Send on WhatsApp":"💬 Отправить в WhatsApp","Fastest reply":"Самый быстрый ответ","✉️ Send by email":"✉️ Отправить по email","📋 Copy my brief":"📋 Скопировать заявку","Paste it anywhere":"Вставьте куда удобно",
 "← Back":"← Назад","Next →":"Далее →","Review my brief →":"Проверить заявку →",
@@ -851,7 +853,7 @@ const EL = {
 "When do you want to move / buy?":"Πότε θέλετε να μετακομίσετε / αγοράσετε;","ASAP":"Το συντομότερο","1–3 months":"1–3 μήνες","Within 1 month":"Μέσα σε 1 μήνα",
 "Preferred language":"Προτιμώμενη γλώσσα","Best way to reach you":"Πώς να επικοινωνήσουμε","Phone call":"Τηλεφωνικά",
 "Are you currently in Cyprus?":"Βρίσκεστε στην Κύπρο;","Yes, I live here":"Ναι, μένω εδώ","Abroad, relocating":"Στο εξωτερικό, μετακομίζω","Buying remotely":"Αγοράζω από απόσταση",
-"Please choose at least one option for:":"Παρακαλούμε επιλέξτε τουλάχιστον μία επιλογή για:","Please add your name and phone so we can reach you.":"Συμπληρώστε όνομα και τηλέφωνο για να επικοινωνήσουμε μαζί σας.",
+"Please choose at least one option for:":"Παρακαλούμε επιλέξτε τουλάχιστον μία επιλογή για:","Location":"Τοποθεσία","Full name":"Ονοματεπώνυμο","Phone / WhatsApp":"Τηλέφωνο / WhatsApp","Please add your name and phone so we can reach you.":"Συμπληρώστε όνομα και τηλέφωνο για να επικοινωνήσουμε μαζί σας.",
 "Your brief is ready":"Το αίτημά σας είναι έτοιμο","Check it below, then send it in one tap. We'll confirm within 24 hours and start searching.":"Ελέγξτε το και στείλτε το με ένα πάτημα. Θα επιβεβαιώσουμε μέσα σε 24 ώρες και ξεκινάμε την αναζήτηση.",
 "💬 Send on WhatsApp":"💬 Αποστολή στο WhatsApp","Fastest reply":"Η πιο γρήγορη απάντηση","✉️ Send by email":"✉️ Αποστολή με email","📋 Copy my brief":"📋 Αντιγραφή αιτήματος","Paste it anywhere":"Επικολλήστε το όπου θέλετε",
 "← Back":"← Πίσω","Next →":"Επόμενο →","Review my brief →":"Έλεγχος αιτήματος →",
@@ -994,20 +996,46 @@ $("#flex").onchange=update;
 
 /* Steps */
 function setNext(){ $("#next").textContent = T(step===4?"Review my brief →":"Next →") }
-function step1Missing(){
-  const m=[]; if(!S.types.length)m.push("types"); if(!S.purpose.length)m.push("purpose"); if(!S.condition.length)m.push("condition"); return m;
-}
-const STEP1_LABEL={types:"Property type",purpose:"Purpose",condition:"Condition"};
-function showErr0(){
-  const m=step1Missing(), e=$("#err0");
-  ["types","purpose","condition"].forEach(k=>$(`[data-multi="${k}"]`).closest(".q").classList.toggle("missing",m.includes(k)));
-  if(!m.length){e.style.display="none";return true}
-  e.textContent=T("Please choose at least one option for:")+" "+m.map(k=>T(STEP1_LABEL[k])).join(", ");
-  e.style.display="block"; return false;
+/* Every multiple-choice question needs at least one answer; free-text boxes stay optional */
+const chipsQ = sel => { const g=$(sel); return {q:g.closest(".q"), box:g}; };
+const fieldQ = sel => { const q=$(sel).closest(".q"); return {q, box:q}; };
+const triOK = i => [...$$("[data-tri]")[i].querySelectorAll("button")].some(b=>S.fac[b.dataset.v]);
+const REQ = {
+  0: [["Property type",()=>S.types.length,()=>chipsQ('[data-multi="types"]')],
+      ["Purpose",()=>S.purpose.length,()=>chipsQ('[data-multi="purpose"]')],
+      ["Condition",()=>S.condition.length,()=>chipsQ('[data-multi="condition"]')]],
+  1: [["Location",()=>S.districts.length||S.anywhere,()=>({q:null,box:$(".cymap")})],
+      ["Location preferences",()=>S.locpref.length,()=>chipsQ('[data-multi="locpref"]')]],
+  2: [["Budget",()=>$("#pmin").value||$("#pmax").value,()=>fieldQ("#pmin")],
+      ["Financing",()=>S.deal!=="Buy"||S.finance,()=>chipsQ('[data-single="finance"]')],
+      ["Bedrooms",()=>S.beds,()=>chipsQ('[data-single="beds"]')],
+      ["Bathrooms",()=>S.baths,()=>chipsQ('[data-single="baths"]')]],
+  3: [["Outdoor & views",()=>triOK(0),()=>({q:$$("[data-tri]")[0].closest(".q"),box:$$("[data-tri]")[0]})],
+      ["Building & comfort",()=>triOK(1),()=>({q:$$("[data-tri]")[1].closest(".q"),box:$$("[data-tri]")[1]})],
+      ["Practical",()=>triOK(2),()=>({q:$$("[data-tri]")[2].closest(".q"),box:$$("[data-tri]")[2]})]],
+  4: [["Full name",()=>$("#name").value.trim(),()=>({q:$("#name").closest(".q"),box:$("#name")})],
+      ["Phone / WhatsApp",()=>$("#phone").value.trim(),()=>({q:$("#phone").closest(".q"),box:$("#phone")})],
+      ["When do you want to move / buy?",()=>S.when,()=>chipsQ('[data-single="when"]')],
+      ["Preferred language",()=>S.lang.length,()=>chipsQ('[data-multi="lang"]')],
+      ["Best way to reach you",()=>S.contact,()=>chipsQ('[data-single="contact"]')],
+      ["Are you currently in Cyprus?",()=>S.incy,()=>chipsQ('[data-single="incy"]')]]
+};
+function checkStep(i, show){
+  const missing=[];
+  (REQ[i]||[]).forEach(([label,ok,el])=>{
+    const bad=!ok(), e=el();
+    if(show||!bad){ if(e.q) e.q.classList.toggle("missing",bad); if(e.box) e.box.classList.toggle("missing-box",bad); }
+    if(bad) missing.push(T(label));
+  });
+  const box=$(`[data-err="${i}"]`);
+  if(box && show){
+    box.textContent = missing.length ? T("Please choose at least one option for:")+" "+missing.join(", ") : "";
+    box.style.display = missing.length ? "block" : "none";
+  }
+  return !missing.length;
 }
 function go(n){
-  if(n>0 && step1Missing().length){ showErr0(); n=0 }
-  if(n>4 && step<=4 && !validate()) { n=4 }
+  if(n>step){ for(let i=0;i<n && i<5;i++){ if(!checkStep(i,true)){ n=i; break; } } }
   step=n;
   $$(".pane").forEach(p=>p.classList.toggle("active",+p.dataset.pane===n));
   $$("#progress button").forEach((b,i)=>{b.classList.toggle("active",i===n);b.classList.toggle("done",i<n)});
@@ -1017,10 +1045,7 @@ function go(n){
   if(n===5) buildReview();
   document.getElementById("brief").scrollIntoView({behavior:"smooth"});
 }
-function validate(){
-  const ok = $("#name").value.trim() && $("#phone").value.trim();
-  $("#err").style.display = ok?"none":"block"; return !!ok;
-}
+
 $("#next").onclick=()=>go(step+1);
 $("#back").onclick=()=>go(step-1);
 $$("#progress button").forEach(b=>b.onclick=()=>go(+b.dataset.go));
@@ -1056,7 +1081,7 @@ function update(){
   $("#meter").style.width=pct+"%";
   $("#meterL").textContent = T(pct<40?"meter0":pct<100?"meter1":"meter2").replace("{p}",pct);
   if(step===5) buildReview();
-  if($("#err0").style.display==="block") showErr0();
+  for(let i=0;i<5;i++){ const e=$(`[data-err="${i}"]`); if(e && e.style.display==="block") checkStep(i,true); }
   save();
 }
 
