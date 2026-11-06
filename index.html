@@ -955,8 +955,8 @@ $$("#deal button").forEach(b=>b.onclick=()=>{
 });
 function fillPrices(){
   const vals = S.deal==="Buy"?BUY:RENT, suf = S.deal==="Rent"?" "+T("/month"):"";
-  /* buying: a "Select minimum" placeholder shows until the client opens the list (amounts start at €100K) */
-  const noMin = S.deal==="Buy" ? `<option value="" disabled selected hidden>${T("Select minimum")}</option>` : `<option value="">${T("No minimum")}</option>`;
+  /* a "Select minimum" placeholder shows until the client opens the list (buying starts at €100K) */
+  const noMin = `<option value="" disabled selected hidden>${T("Select minimum")}</option>`;   /* renting starts at €500/month */
   $("#pmin").innerHTML = noMin+vals.map(v=>`<option value="${v}">${fmt(v)}${suf}</option>`).join("");
   $("#pmax").innerHTML = `<option value="" disabled selected hidden>${T("Select maximum")}</option>`+vals.map(v=>`<option value="${v}">${fmt(v)}${suf}</option>`).join("")+(S.deal==="Buy"?`<option value="99999999">€10M+</option>`:"");
   $("#budgetHint").textContent = T(S.deal==="Buy" ? "Your purchase budget in euros." : "Your monthly rent budget in euros.");
