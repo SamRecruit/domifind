@@ -427,9 +427,6 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px;
                   <text class="dlabel" data-l="Famagusta" x="405" y="140">Famagusta</text>
                 </svg>
               </div>
-              <div class="q" style="margin-top:16px">
-                <label class="toggle"><input type="checkbox" id="anywhere"> I'm open to anywhere in Cyprus. Advise me.</label>
-              </div>
             </div>
             <div class="areas-col" id="areas" data-dyn>
               <div class="empty">👈 Select a district on the map to see its neighbourhoods.</div>
@@ -974,7 +971,6 @@ $$(".district").forEach(p=>p.onclick=()=>{
   if(i>-1){S.districts.splice(i,1); delete S.areas[d]} else {S.districts.push(d); S.areas[d]=[]}
   renderMap(); renderAreas(); update();
 });
-$("#anywhere").onchange=e=>{S.anywhere=e.target.checked; update()};
 function renderMap(){
   $$(".district").forEach(p=>p.classList.toggle("on",S.districts.includes(p.dataset.d)));
   $$(".dlabel").forEach(t=>t.classList.toggle("on",S.districts.includes(t.dataset.l)));
@@ -1007,7 +1003,7 @@ const REQ = {
   0: [["Property type",()=>S.types.length,()=>chipsQ('[data-multi="types"]')],
       ["Purpose",()=>S.purpose.length,()=>chipsQ('[data-multi="purpose"]')],
       ["Condition",()=>S.condition.length,()=>chipsQ('[data-multi="condition"]')]],
-  1: [["Location",()=>S.districts.length||S.anywhere,()=>({q:null,box:$(".cymap")})],
+  1: [["Location",()=>S.districts.length,()=>({q:null,box:$(".cymap")})],
       ["Location preferences",()=>S.locpref.length,()=>chipsQ('[data-multi="locpref"]')]],
   2: [["Budget",()=>$("#pmin").value||$("#pmax").value,()=>fieldQ("#pmin")],
       ["Financing",()=>S.deal!=="Buy"||S.finance,()=>chipsQ('[data-single="finance"]')],
@@ -1131,7 +1127,7 @@ function load(){
     ["types","purpose","condition"].forEach(k=>{ if(Array.isArray(S[k])) S[k]=S[k].slice(0,1) });
     $$("#deal button").forEach(b=>b.classList.toggle("on",b.dataset.v===S.deal));
     fillPrices();
-    FIELDS.forEach(i=>{ if(d.f[i]!=null) $("#"+i).value=d.f[i] }); $("#flex").checked=!!d.flex; $("#anywhere").checked=!!S.anywhere;
+    FIELDS.forEach(i=>{ if(d.f[i]!=null) $("#"+i).value=d.f[i] }); $("#flex").checked=!!d.flex; S.anywhere=false;
     $$("[data-multi]").forEach(g=>g.querySelectorAll("button").forEach(b=>b.classList.toggle("on",(S[g.dataset.multi]||[]).includes(b.dataset.v))));
     $$("[data-single]").forEach(g=>g.querySelectorAll("button").forEach(b=>b.classList.toggle("on",S[g.dataset.single]===b.dataset.v)));
     $$("[data-tri] button").forEach(b=>{const n=S.fac[b.dataset.v]||0;b.classList.toggle("on",n>0);b.classList.toggle("must",n===2)});
