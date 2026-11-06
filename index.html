@@ -203,6 +203,15 @@ textarea{min-height:96px;resize:vertical}
 .q.row.missing-box select{outline:2px solid #F3B9A3;outline-offset:6px}
 .q.row > .inline-err{grid-column:1/-1;margin-top:4px}
 .inline-err{display:none;color:#C2412D;font-size:.86rem;font-weight:600;margin-top:12px}
+.legend{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:14px 0 28px}
+.lg{display:flex;align-items:center;gap:12px;background:var(--sand);border:1.5px solid var(--line);border-radius:16px;padding:16px 14px}
+.lg-chip{flex:0 0 auto;min-width:52px;text-align:center;border-radius:999px;padding:9px 14px;font-weight:800;font-size:1.05rem;border:1.5px solid var(--line);background:#fff;color:var(--ink)}
+.lg-chip.nice{background:var(--sea);border-color:var(--sea);color:#fff}
+.lg-chip.must{background:var(--terra);border-color:var(--terra);color:#fff}
+.lg b{display:block;font-size:.95rem;color:var(--muted);font-weight:600}
+.lg-res{display:block;white-space:nowrap;font-family:Fraunces,Georgia,serif;font-size:1.22rem;font-weight:700;color:var(--ink);line-height:1.2}
+.lg-res.nice{color:var(--sea)} .lg-res.must{color:var(--terra)}
+@media(max-width:700px){.legend{grid-template-columns:1fr}}
 .err{color:#C2412D;font-size:.88rem;font-weight:600;margin-top:8px;display:none}
 
 /* WHY / FAQ */
@@ -522,7 +531,11 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px;
         <!-- STEP 4 -->
         <div class="pane" data-pane="3">
           <h3>Must-haves & nice-to-haves</h3>
-          <p class="hint">Tap once = <b style="color:var(--sea)">nice to have</b>. Tap twice = <b style="color:var(--terra)">must have</b>. Tap again to clear.</p>
+          <div class="legend">
+            <div class="lg"><span class="lg-chip nice">1×</span><div><b>Tap once</b><span class="lg-res nice">Nice to have</span></div></div>
+            <div class="lg"><span class="lg-chip must">2×</span><div><b>Tap twice</b><span class="lg-res must">★ <span>Must have</span></span></div></div>
+            <div class="lg"><span class="lg-chip">3×</span><div><b>Tap again</b><span class="lg-res">Clear</span></div></div>
+          </div>
           <div class="q">
             <label class="t">Outdoor & views</label>
             <div class="chips" data-tri="fac">
@@ -767,7 +780,7 @@ const RU = {
 "I can stretch ~10% for the right property":"Могу добавить ~10% за подходящий объект",
 "Financing":"Финансирование","Cash":"Наличные","Mortgage approved":"Ипотека одобрена","Need mortgage help":"Нужна помощь с ипотекой","Not sure yet":"Пока не знаю",
 "Bedrooms":"Спальни","Bathrooms":"Ванные","Min. covered area (m²)":"Мин. крытая площадь (м²)","e.g. 120":"например, 120","Min. plot / garden (m²)":"Мин. участок / сад (м²)","optional":"необязательно",
-"Must-haves & nice-to-haves":"Обязательно и желательно","Tap once =":"Одно нажатие =","nice to have":"желательно",". Tap twice =":". Два нажатия =","must have":"обязательно",". Tap again to clear.":". Ещё раз — сбросить.",
+"Must-haves & nice-to-haves":"Обязательно и желательно","Tap once":"Одно нажатие","Nice to have":"Желательно","Tap twice":"Два нажатия","Must have":"Обязательно","Tap again":"Ещё раз","Clear":"Сбросить","Tap once =":"Одно нажатие =","nice to have":"желательно",". Tap twice =":". Два нажатия =","must have":"обязательно",". Tap again to clear.":". Ещё раз — сбросить.",
 "Outdoor & views":"Снаружи и виды","Private pool":"Свой бассейн","Communal pool":"Общий бассейн","Garden":"Сад","Large veranda":"Большая веранда","Roof garden":"Сад на крыше","BBQ area":"Зона барбекю",
 "Building & comfort":"Здание и комфорт","Covered parking":"Крытая парковка","2+ parking":"2+ парковки","2+ parking spaces":"2+ парковки","Storage":"Кладовая","Storage room":"Кладовая","Elevator":"Лифт","Central A/C":"Центральный кондиционер","Underfloor heating":"Тёплый пол","Solar / PV":"Солнечные панели","Solar panels / PV":"Солнечные панели","Energy class A":"Энергокласс A","Smart home":"Умный дом","Gym":"Спортзал","Concierge / security":"Консьерж / охрана","Home office":"Кабинет","Home office room":"Кабинет","Maid's room":"Комната для персонала",
 "Practical":"Практичное","Title deeds available":"Есть титул собственности","Furnished":"С мебелью","Unfurnished":"Без мебели","Pet friendly":"Можно с животными","Ground floor / no stairs":"Первый этаж / без лестниц","Accessible":"Доступно для колясок","Wheelchair accessible":"Доступно для колясок","Rental potential":"Потенциал аренды","Rental income potential":"Потенциал аренды",
@@ -858,7 +871,7 @@ const EL = {
 "I can stretch ~10% for the right property":"Μπορώ να αυξήσω ~10% για το σωστό ακίνητο",
 "Financing":"Χρηματοδότηση","Cash":"Μετρητά","Mortgage approved":"Εγκεκριμένο δάνειο","Need mortgage help":"Χρειάζομαι βοήθεια με δάνειο","Not sure yet":"Δεν ξέρω ακόμα",
 "Bedrooms":"Υπνοδωμάτια","Bathrooms":"Μπάνια","Min. covered area (m²)":"Ελάχ. καλυμμένο εμβαδόν (m²)","e.g. 120":"π.χ. 120","Min. plot / garden (m²)":"Ελάχ. οικόπεδο / κήπος (m²)","optional":"προαιρετικό",
-"Must-haves & nice-to-haves":"Απαραίτητα & επιθυμητά","Tap once =":"Ένα πάτημα =","nice to have":"επιθυμητό",". Tap twice =":". Δύο πατήματα =","must have":"απαραίτητο",". Tap again to clear.":". Ξανά για ακύρωση.",
+"Must-haves & nice-to-haves":"Απαραίτητα & επιθυμητά","Tap once":"Ένα πάτημα","Nice to have":"Επιθυμητό","Tap twice":"Δύο πατήματα","Must have":"Απαραίτητο","Tap again":"Ξανά","Clear":"Ακύρωση","Tap once =":"Ένα πάτημα =","nice to have":"επιθυμητό",". Tap twice =":". Δύο πατήματα =","must have":"απαραίτητο",". Tap again to clear.":". Ξανά για ακύρωση.",
 "Outdoor & views":"Εξωτερικοί χώροι & θέα","Private pool":"Ιδιωτική πισίνα","Communal pool":"Κοινόχρηστη πισίνα","Garden":"Κήπος","Large veranda":"Μεγάλη βεράντα","Roof garden":"Ταράτσα-κήπος","BBQ area":"Χώρος BBQ",
 "Building & comfort":"Κτίριο & άνεση","Covered parking":"Στεγασμένος χώρος στάθμευσης","2+ parking":"2+ θέσεις στάθμευσης","2+ parking spaces":"2+ θέσεις στάθμευσης","Storage":"Αποθήκη","Storage room":"Αποθήκη","Elevator":"Ανελκυστήρας","Central A/C":"Κεντρικός κλιματισμός","Underfloor heating":"Ενδοδαπέδια θέρμανση","Solar / PV":"Φωτοβολταϊκά","Solar panels / PV":"Φωτοβολταϊκά","Energy class A":"Ενεργειακή κλάση Α","Smart home":"Έξυπνο σπίτι","Gym":"Γυμναστήριο","Concierge / security":"Θυρωρός / ασφάλεια","Home office":"Γραφείο στο σπίτι","Home office room":"Γραφείο στο σπίτι","Maid's room":"Δωμάτιο βοηθού",
 "Practical":"Πρακτικά","Title deeds available":"Διαθέσιμος τίτλος ιδιοκτησίας","Furnished":"Επιπλωμένο","Unfurnished":"Χωρίς έπιπλα","Pet friendly":"Επιτρέπονται κατοικίδια","Ground floor / no stairs":"Ισόγειο / χωρίς σκάλες","Accessible":"Προσβάσιμο σε ΑμεΑ","Wheelchair accessible":"Προσβάσιμο σε ΑμεΑ","Rental potential":"Δυνατότητα ενοικίασης","Rental income potential":"Δυνατότητα ενοικίασης",
