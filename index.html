@@ -1079,12 +1079,46 @@ function applyTypeRules(){
   if(noBeds()){ S.beds=""; bedsQ.querySelectorAll("button").forEach(b=>b.classList.remove("on")); }
   if(noRooms()){ S.baths=""; bathsQ.querySelectorAll("button").forEach(b=>b.classList.remove("on")); }
   $(".opt-note").textContent = bathsOpt() ? T("(optional)") : "";
+  applyMustHaveRules();
   /* Studio or 1 bedroom -> 1 bathroom filled in automatically, question hidden */
   const autoBath = !noBeds() && ["Studio","1"].includes(S.beds);
   const setBath = v => { S.baths=v; bathsQ.querySelectorAll("button").forEach(b=>b.classList.toggle("on",b.dataset.v===v)); };
   if(autoBath){ setBath("1"); S.bathsAuto=true; bathsQ.style.display="none"; }
   else if(S.bathsAuto){ setBath(""); S.bathsAuto=false; }
 }
+
+/* Must-haves that make no sense for a property type are hidden */
+const OFFICE_HIDE=["Private pool","Communal pool","Garden","Roof garden","BBQ area","Smart home","Gym","Home office room","Maid's room","Pet friendly"];
+const MUST_HIDE={
+  "Penthouse":["Garden","Ground floor / no stairs"],
+  "Maisonette / Townhouse":["Elevator","Concierge / security","Ground floor / no stairs"],
+  "Office":OFFICE_HIDE,
+  "Shop":[...OFFICE_HIDE,"Large veranda","Sea view","Elevator","Ground floor / no stairs"],
+  "Building":["Home office room","Maid's room","Pet friendly","Ground floor / no stairs"],
+};
+const LAND_KEEP=["Sea view","Title deeds available"];
+const RESIDENTIAL=["Apartment","Penthouse","House / Villa","Maisonette / Townhouse"];
+const isResidential = () => !S.types.length || S.types.some(t=>RESIDENTIAL.includes(t));
+const isCommercial  = () => S.types.some(t=>COMMERCIAL.includes(t));
+function mustHidden(v){
+  const t=S.types[0]; if(!t) return false;
+  if(t===LAND) return !LAND_KEEP.includes(v);
+  return (MUST_HIDE[t]||[]).includes(v);
+}
+function applyMustHaveRules(){
+  $$("[data-tri]").forEach(g=>{
+    let shown=0;
+    g.querySelectorAll("button").forEach(b=>{
+      const hide=mustHidden(b.dataset.v);
+      b.style.display = hide ? "none" : "";
+      if(hide && S.fac[b.dataset.v]){ delete S.fac[b.dataset.v]; b.classList.remove("on","must"); }
+      if(!hide) shown++;
+    });
+    g.closest(".q").style.display = shown ? "" : "none";
+  });
+}
+const anyMust = () => Object.keys(S.fac).length>0;
+const firstVisibleTri = () => { const g=$$("[data-tri]").find(x=>x.closest(".q").style.display!=="none")||$$("[data-tri]")[0]; return {q:g.closest(".q"),box:g}; };
 
 /* Every multiple-choice question needs at least one answer; free-text boxes stay optional */
 const chipsQ = sel => { const g=$(sel); return {q:g.closest(".q"), box:g}; };
@@ -1102,9 +1136,10 @@ const REQ = {
       ["Financing",()=>S.deal!=="Buy"||S.finance,()=>chipsQ('[data-single="finance"]')],
       ["Bedrooms",()=>noBeds()||S.beds,()=>chipsQ('[data-single="beds"]')],
       ["Bathrooms",()=>noRooms()||bathsOpt()||S.baths,()=>chipsQ('[data-single="baths"]')]],
-  3: [["Outdoor & views",()=>triOK(0),()=>({q:$$("[data-tri]")[0].closest(".q"),box:$$("[data-tri]")[0]})],
-      ["Building & comfort",()=>triOK(1),()=>({q:$$("[data-tri]")[1].closest(".q"),box:$$("[data-tri]")[1]})],
-      ["Practical",()=>triOK(2),()=>({q:$$("[data-tri]")[2].closest(".q"),box:$$("[data-tri]")[2]})]],
+  3: [["Outdoor & views",()=>!isResidential()||triOK(0),()=>({q:$$("[data-tri]")[0].closest(".q"),box:$$("[data-tri]")[0]})],
+      ["Building & comfort",()=>!isResidential()||triOK(1),()=>({q:$$("[data-tri]")[1].closest(".q"),box:$$("[data-tri]")[1]})],
+      ["Practical",()=>!isResidential()||triOK(2),()=>({q:$$("[data-tri]")[2].closest(".q"),box:$$("[data-tri]")[2]})],
+      ["Must-haves",()=>!isCommercial()||anyMust(),firstVisibleTri]],
   4: [["Full name",()=>$("#name").value.trim(),()=>({q:$("#name").closest(".q"),box:$("#name")}),"This field is required"],
       ["Phone / WhatsApp",()=>$("#phone").value.trim(),()=>({q:$("#phone").closest(".q"),box:$("#phone")}),"This field is required"],
       ["When do you want to move / buy?",()=>S.when,()=>chipsQ('[data-single="when"]')],
