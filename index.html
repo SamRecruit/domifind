@@ -1085,8 +1085,8 @@ function applyTypeRules(){
   $(".opt-note").textContent = bathsOpt() ? T("(optional)") : "";
   applyMustHaveRules();
   applyPurposeAndSize();
-  /* Studio or 1 bedroom -> "1" bathroom selected automatically (still visible, can be changed) */
-  const autoBath = !noBeds() && ["Studio","1"].includes(S.beds);
+  /* Studio, 1 or 2 bedrooms -> "1" bathroom selected automatically (still visible, can be changed) */
+  const autoBath = !noBeds() && ["Studio","1","2"].includes(S.beds);
   const setBath = v => { S.baths=v; bathsQ.querySelectorAll("button").forEach(b=>b.classList.toggle("on",b.dataset.v===v)); };
   if(autoBath){ if(!S.baths || S.bathsAuto){ setBath("1"); S.bathsAuto=true; } }
   else if(S.bathsAuto){ setBath(""); S.bathsAuto=false; }
