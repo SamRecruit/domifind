@@ -247,7 +247,7 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px;
       <span class="logo-txt"><span class="wm">Domi<span>find</span></span><small class="tagline">Your home, found.</small></span>
     </a>
     <div class="navlinks">
-      <div class="langsw" data-dyn><button data-lang="en" class="on">EN</button><button data-lang="el">ΕΛ</button><button data-lang="ru">RU</button></div>
+      <div class="langsw" data-dyn><button data-lang="en" class="on">EN</button><button data-lang="fr">FR</button><button data-lang="el">ΕΛ</button><button data-lang="ru">RU</button></div>
       <a href="#how">How it works</a>
       <a href="#why">Why Domifind</a>
       <a href="#faq">FAQ</a>
@@ -919,7 +919,108 @@ const EL = {
 "Ayia Napa":"Αγία Νάπα","Protaras":"Πρωταράς","Paralimni":"Παραλίμνι","Kapparis":"Κάππαρης","Deryneia":"Δερύνεια","Sotira":"Σωτήρα","Frenaros":"Φρέναρος","Ayia Thekla":"Αγία Θέκλα"
 };
 
-const DICT = {ru:RU, el:EL};
+const FR = {
+"How it works":"Comment ça marche","Why Domifind":"Pourquoi Domifind","FAQ":"FAQ","Start my search":"Lancer ma recherche",
+"Your home, found.":"Votre maison, trouvée.",
+"Personal property search across Cyprus":"Recherche immobilière personnalisée dans tout Chypre",
+"Tell us once.":"Dites-le une fois.","We search":"Nous cherchons","everything.":"partout.",
+"No time to search? Good, that's our job. You spend 3 minutes. We spend the hours: every agency, every listing, every viewing. You get only the best matches, and pay nothing until you decide.":"Pas le temps de chercher ? Tant mieux, c’est notre métier. Vous y consacrez 3 minutes. Nous y passons des heures : chaque agence, chaque annonce, chaque visite. Vous ne recevez que les meilleures options et ne payez rien tant que vous n’avez pas décidé.",
+"Describe my ideal property →":"Décrire mon bien idéal →","See how it works":"Voir comment ça marche",
+"upfront":"d’avance","brief, not 50 calls":"demande, pas 50 appels","All districts":"Tous les districts","of Cyprus":"de Chypre",
+"Save 50+ hours of searching":"Gagnez plus de 50 heures de recherche",
+"Shortlist ready":"Sélection prête","5 best matches, Limassol":"5 meilleures options, Limassol","Pre-visited for you":"Visités pour vous","Only properties worth seeing":"Seulement les biens qui valent la visite",
+"The problem":"Le problème","Property hunting in Cyprus is a second job":"Chercher un bien à Chypre, c’est un deuxième travail",
+"Hundreds of agencies, the same flat listed ten times at ten prices, photos that don't match reality. We take all of it off your plate.":"Des centaines d’agences, le même appartement affiché dix fois à dix prix différents, des photos loin de la réalité. Nous nous occupons de tout.",
+"Searching on your own":"Chercher seul",
+"Scrolling Bazaraki and 30 agency sites every evening":"Parcourir Bazaraki et 30 sites d’agences chaque soir",
+"Duplicate listings, outdated ads, \"just sold\" surprises":"Annonces en double, annonces périmées, surprises « déjà vendu »",
+"Calling agents who push what they want to sell":"Appeler des agents qui poussent ce qu’ils veulent vendre",
+"Weekends lost on viewings that don't match the photos":"Des week-ends perdus en visites qui ne ressemblent pas aux photos",
+"Unsure about title deeds, fair prices and hidden costs":"Des doutes sur les titres de propriété, les prix justes et les frais cachés",
+"With Domifind":"Avec Domifind","One brief, written once, in 3 minutes":"Une seule demande, rédigée une fois, en 3 minutes",
+"We scan the whole market: agencies, developers, private sellers":"Nous passons tout le marché au crible : agences, promoteurs, particuliers",
+"We filter, verify and pre-visit for you":"Nous filtrons, vérifions et visitons pour vous",
+"You receive only a curated shortlist that fits your brief":"Vous recevez uniquement une sélection adaptée à votre demande",
+"You visit only the ones worth your time":"Vous ne visitez que ce qui en vaut la peine",
+"Four steps. You do one of them.":"Quatre étapes. Vous n’en faites qu’une.",
+"You describe":"Vous décrivez","Budget, location down to the neighbourhood, size, must-haves and deal-breakers.":"Budget, emplacement jusqu’au quartier, surface, critères indispensables et rédhibitoires.",
+"Every portal, agency and developer in Cyprus, including off-market properties.":"Tous les portails, agences et promoteurs de Chypre, y compris les biens hors marché.",
+"We select":"Nous sélectionnons","We check and compare, and keep only the best options with honest notes on each.":"Nous vérifions, comparons et ne gardons que les meilleures options, avec un avis honnête sur chacune.",
+"You decide":"Vous décidez","Visit your shortlist, choose your home. Only then do we get paid.":"Visitez votre sélection, choisissez votre bien. Ce n’est qu’à ce moment-là que nous sommes payés.",
+"Nothing to pay until you've made up your mind":"Rien à payer tant que vous n’avez pas décidé",
+"No subscription, no deposit, no upfront fee. Our fee is due only once you've chosen your property.":"Sans abonnement, sans dépôt, sans frais d’avance. Nos honoraires ne sont dus qu’une fois votre bien choisi.",
+"Start for free":"Commencer gratuitement",
+"Your brief":"Votre demande","Describe your perfect property":"Décrivez votre bien idéal",
+"Be as precise or as open as you like. The more we know, the better your shortlist.":"Soyez aussi précis ou ouvert que vous le souhaitez. Plus nous en savons, meilleure sera votre sélection.",
+"1 · Property":"1 · Bien","2 · Location":"2 · Emplacement","3 · Budget & size":"3 · Budget & surface","4 · Must-haves":"4 · Critères","5 · About you":"5 · Vous","6 · Send":"6 · Envoi",
+"What are you looking for?":"Que recherchez-vous ?","Start with the basics.":"Commençons par l’essentiel.","I want to":"Je souhaite","Buy":"Acheter","Rent":"Louer",
+"Property type":"Type de bien","(choose one)":"(un seul choix)",
+"Apartment":"Appartement","Penthouse":"Penthouse","House":"Maison","Villa":"Villa","House / Villa":"Maison / Villa","Townhouse":"Maison de ville","Maisonette / Townhouse":"Maisonnette / Maison de ville","Studio":"Studio","Plot / Land":"Terrain","Office":"Bureau","Shop":"Commerce","Whole building":"Immeuble entier","Building":"Immeuble entier",
+"Purpose":"Objectif","Main home":"Résidence principale","Holiday home":"Résidence secondaire","Investment / rental income":"Investissement / revenu locatif","Relocation for work":"Mutation professionnelle","Residency / permit":"Résidence / permis de séjour","Business premises":"Local professionnel",
+"Condition":"État","New build":"Neuf","Off-plan":"Sur plan","Off-plan / under construction":"Sur plan","Resale":"Revente","To renovate":"À rénover","Any":"Peu importe","Any condition":"Peu importe",
+"Where exactly?":"Où exactement ?","Tap one or more districts on the map, then pick the neighbourhoods you like.":"Touchez un ou plusieurs districts sur la carte, puis choisissez les quartiers qui vous plaisent.",
+"I'm open to anywhere in Cyprus. Advise me.":"Je suis ouvert à tout Chypre. Conseillez-moi.",
+"Location preferences":"Préférences d’emplacement","Walk to beach":"Plage à pied","Sea view":"Vue mer","City centre":"Centre-ville","Quiet / village":"Calme / village","Mountain view":"Vue montagne","Near int'l schools":"Près des écoles internationales","Near highway":"Près de l’autoroute","Near airport":"Près de l’aéroport","Shops & cafés":"Commerces & cafés",
+"Must be close to…":"Doit être proche de…","(office, school, family. Optional)":"(bureau, école, famille. Facultatif)",
+"e.g. Max 15 min drive from my office at the Limassol Marina":"ex. 15 min en voiture maximum de mon bureau à la Marina de Limassol",
+"Budget & size":"Budget & surface","Your purchase budget in euros.":"Votre budget d’achat en euros.","Your monthly rent budget in euros.":"Votre budget de loyer mensuel en euros.",
+"Minimum":"Minimum","Maximum":"Maximum","No minimum":"Sans minimum","Select minimum":"Choisir le minimum","Select maximum":"Choisir le maximum","No maximum":"Sans maximum",
+"I can stretch ~10% for the right property":"Je peux aller ~10 % au-dessus pour le bon bien",
+"Financing":"Financement","Cash":"Comptant","Mortgage approved":"Prêt accordé","Need mortgage help":"Besoin d’aide pour un prêt","Not sure yet":"Je ne sais pas encore",
+"Bedrooms":"Chambres","Bathrooms":"Salles de bain","Min. covered area (m²)":"Surface habitable min. (m²)","e.g. 120":"ex. 120","Min. plot / garden (m²)":"Terrain / jardin min. (m²)","optional":"facultatif",
+"Must-haves & nice-to-haves":"Indispensable & souhaitable",
+"Tap once":"Un appui","Nice to have":"Souhaitable","Tap twice":"Deux appuis","Must have":"Indispensable","Tap again":"Encore une fois","Clear":"Effacer",
+"Tap once =":"Un appui =","nice to have":"souhaitable",". Tap twice =":". Deux appuis =","must have":"indispensable",". Tap again to clear.":". Encore une fois pour effacer.",
+"Outdoor & views":"Extérieur & vues","Private pool":"Piscine privée","Communal pool":"Piscine commune","Garden":"Jardin","Large veranda":"Grande véranda","Roof garden":"Toit-terrasse","BBQ area":"Coin barbecue",
+"Building & comfort":"Bâtiment & confort","Covered parking":"Parking couvert","2+ parking":"2 places de parking ou plus","2+ parking spaces":"2 places de parking ou plus","Storage":"Cellier","Storage room":"Cellier","Elevator":"Ascenseur","Central A/C":"Climatisation centrale","Underfloor heating":"Chauffage au sol","Solar / PV":"Panneaux solaires","Solar panels / PV":"Panneaux solaires","Energy class A":"Classe énergétique A","Smart home":"Maison connectée","Gym":"Salle de sport","Concierge / security":"Gardien / sécurité","Home office":"Bureau à domicile","Home office room":"Bureau à domicile","Maid's room":"Chambre de service",
+"Practical":"Pratique","Title deeds available":"Titre de propriété disponible","Furnished":"Meublé","Unfurnished":"Non meublé","Pet friendly":"Animaux acceptés","Ground floor / no stairs":"Rez-de-chaussée / sans escalier","Accessible":"Accessible PMR","Wheelchair accessible":"Accessible PMR","Rental potential":"Potentiel locatif","Rental income potential":"Potentiel locatif",
+"Deal-breakers":"Rédhibitoire","(anything you absolutely don't want)":"(ce que vous ne voulez surtout pas)",
+"e.g. No main road, no top floor without lift, not facing north":"ex. Pas sur une grande route, pas de dernier étage sans ascenseur, pas orienté nord",
+"Anything else?":"Autre chose ?","Your dream, in your own words":"Votre rêve, avec vos mots",
+"e.g. Bright, modern, open-plan kitchen, a quiet street where kids can play, 10 min from the Old Port…":"ex. Lumineux, moderne, cuisine ouverte, une rue calme où les enfants peuvent jouer, à 10 min du Vieux Port…",
+"About you":"Vous","So we can send you your shortlist.":"Pour que nous puissions vous envoyer votre sélection.",
+"Full name *":"Nom complet *","Your name":"Votre nom","Phone / WhatsApp *":"Téléphone / WhatsApp *","Email":"E-mail",
+"When do you want to move / buy?":"Quand souhaitez-vous emménager / acheter ?","ASAP":"Au plus vite","1–3 months":"1 à 3 mois","Within 1 month":"Sous 1 mois",
+"Preferred language":"Langue préférée","Best way to reach you":"Meilleur moyen de vous joindre","Phone call":"Appel",
+"Are you currently in Cyprus?":"Êtes-vous actuellement à Chypre ?","Yes, I live here":"Oui, j’y vis","Abroad, relocating":"À l’étranger, je m’installe","Buying remotely":"J’achète à distance",
+"Please choose at least one option for:":"Veuillez choisir au moins une option pour :","Location":"Emplacement",
+"Build my own home":"Construire ma maison","Development project":"Projet de promotion","Investment":"Investissement","Min. plot size (m²)":"Surface de terrain min. (m²)","(optional)":"(facultatif)",
+"Please choose at least one option":"Veuillez choisir au moins une option","Please choose one option":"Veuillez choisir une option","Please choose a minimum or maximum budget":"Veuillez choisir un budget minimum ou maximum","Please choose a delivery time":"Veuillez choisir un délai de livraison","Please choose at least one neighbourhood":"Veuillez choisir au moins un quartier","Please choose a district on the map":"Veuillez choisir un district sur la carte","This field is required":"Ce champ est obligatoire",
+"Maximum delivery time":"Délai de livraison maximum","When should the property be ready at the latest?":"Quand le bien doit-il être prêt au plus tard ?",
+"< 6 months":"< 6 mois","< 1 year":"< 1 an","< 2 years":"< 2 ans","Required":"Obligatoire",
+"Required for off-plan properties: when must it be ready at the latest?":"Obligatoire pour les biens sur plan : quand doit-il être prêt au plus tard ?",
+"← Choose another condition":"← Choisir un autre état","Delivery:":"Livraison :","Change":"Modifier","Neighbourhood":"Quartier","Full name":"Nom complet","Phone / WhatsApp":"Téléphone / WhatsApp",
+"Please add your name and phone so we can reach you.":"Indiquez votre nom et votre téléphone pour que nous puissions vous joindre.",
+"Your brief is ready":"Votre demande est prête","Check it below, then send it in one tap. We'll confirm within 24 hours and start searching.":"Vérifiez-la ci-dessous, puis envoyez-la en un geste. Nous confirmons sous 24 heures et lançons la recherche.",
+"💬 Send on WhatsApp":"💬 Envoyer sur WhatsApp","Fastest reply":"Réponse la plus rapide","✉️ Send by email":"✉️ Envoyer par e-mail","📋 Copy my brief":"📋 Copier ma demande","Paste it anywhere":"Collez-la où vous voulez",
+"← Back":"← Retour","Next →":"Suivant →","Review my brief →":"Vérifier ma demande →",
+"Your search":"Votre recherche","Updates as you go":"Se met à jour au fil de vos réponses","Looking to":"Projet","Type":"Type","Where":"Où","Budget":"Budget","Size":"Surface","Must-haves":"Indispensables","Not set yet":"Pas encore renseigné",
+"On your side, not the seller's":"De votre côté, pas de celui du vendeur",
+"Most agents are paid to sell the properties they list. Domifind works for one person only: you.":"La plupart des agents sont payés pour vendre leurs propres biens. Domifind ne travaille que pour une seule personne : vous.",
+"The whole market":"Tout le marché","Portals, agencies, developers and private sellers. Listings you'd never find on your own, all in one place.":"Portails, agences, promoteurs et particuliers. Des biens que vous ne trouveriez jamais seul, réunis au même endroit.",
+"Verified & honest":"Vérifié & honnête","We check title deeds, real prices and condition, and tell you the downsides too.":"Nous vérifions les titres de propriété, les vrais prix et l’état du bien, et nous vous disons aussi les points faibles.",
+"We speak your language":"Nous parlons votre langue","Contact us in the language of your choice. We'll do our best to meet your needs.":"Contactez-nous dans la langue de votre choix. Nous ferons tout pour répondre à vos besoins.",
+"Your time back":"Votre temps retrouvé","No more evenings of scrolling. You only visit properties that already fit.":"Fini les soirées à faire défiler les annonces. Vous ne visitez que des biens qui vous correspondent.",
+"Negotiation support":"Aide à la négociation","Once you've found the one, we help you get the right price and terms.":"Une fois le bon bien trouvé, nous vous aidons à obtenir le bon prix et les bonnes conditions.",
+"Pay only at the end":"Vous ne payez qu’à la fin","No upfront costs. If you don't find your property, you don't pay.":"Aucun frais d’avance. Si vous ne trouvez pas votre bien, vous ne payez rien.",
+"Good questions":"Questions fréquentes","Is it really free to start?":"Est-ce vraiment gratuit pour commencer ?",
+"Yes. Sending your brief and receiving your shortlist costs nothing. Our fee applies only once you've chosen a property and decided to go ahead.":"Oui. Envoyer votre demande et recevoir votre sélection ne coûte rien. Nos honoraires ne s’appliquent qu’une fois que vous avez choisi un bien et décidé d’aller de l’avant.",
+"How fast will I get my shortlist?":"En combien de temps vais-je recevoir ma sélection ?","Usually within a few days, depending on how specific your brief is and the market in your chosen area. We'll keep you updated along the way.":"En général sous quelques jours, selon la précision de votre demande et le marché dans la zone choisie. Nous vous tenons informé à chaque étape.",
+"Can I search from abroad?":"Puis-je chercher depuis l’étranger ?","Absolutely. Many clients relocate to Cyprus. We can do video viewings, check areas for you and organise everything before you arrive.":"Bien sûr. Beaucoup de nos clients s’installent à Chypre. Nous pouvons faire des visites en vidéo, repérer les quartiers pour vous et tout organiser avant votre arrivée.",
+"Do you only show properties from one agency?":"Ne proposez-vous que les biens d’une seule agence ?","No. We search across the entire Cyprus market, so you get the best options, not the ones a single agency needs to sell.":"Non. Nous cherchons sur tout le marché chypriote : vous obtenez les meilleures options, pas celles qu’une seule agence doit vendre.",
+"Do you also help with rentals?":"Vous occupez-vous aussi des locations ?","Yes. Long-term rentals in all districts, for families, professionals and companies relocating staff.":"Oui. Locations longue durée dans tous les districts, pour les familles, les professionnels et les entreprises qui font venir des collaborateurs.",
+"Stop searching. Start choosing.":"Arrêtez de chercher. Commencez à choisir.","Three minutes to describe it. We'll do the rest.":"Trois minutes pour le décrire. Nous faisons le reste.",
+"Limassol · Paphos · Larnaca · Nicosia · Famagusta":"Limassol · Paphos · Larnaca · Nicosie · Famagouste","© 2026 Domifind · Cyprus":"© 2026 Domifind · Chypre",
+"Limassol":"Limassol","Paphos":"Paphos","Nicosia":"Nicosie","Larnaca":"Larnaca","Famagusta":"Famagouste",
+"👈 Select a district on the map to see its neighbourhoods.":"👈 Choisissez un district sur la carte pour voir ses quartiers.",
+"Anywhere in":"Partout à","Anywhere in Cyprus":"Partout à Chypre","(any area)":"(tous les quartiers)","open to other areas":"ouvert à d’autres zones",
+"From":"À partir de","Up to":"Jusqu’à","/month":"/mois","/mo":"/mois","(±10% flexible)":"(±10 % de marge)","bed":"ch.","bath":"sdb","min":"min.","plot":"terrain",
+"Brief copied ✓":"Demande copiée ✓","Selected. Press Ctrl/Cmd+C to copy":"Sélectionné. Appuyez sur Ctrl/Cmd+C pour copier",
+"meter0":"Demande remplie à {p} %. Continuez","meter1":"Demande remplie à {p} %. C’est très bien","meter2":"Demande complète ✓ Prête à envoyer",
+"Old Port / Marina":"Vieux Port / Marina","Limassol villages (Souni, Fasoula…)":"Villages de Limassol (Souni, Fasoula…)","Paphos centre":"Centre de Paphos","Paphos villages":"Villages de Paphos","Nicosia villages":"Villages de Nicosie","Larnaca villages":"Villages de Larnaca","Finikoudes / seafront":"Finikoudes / front de mer"
+};
+
+const DICT = {ru:RU, el:EL, fr:FR};
 let LANG = "en";
 const T = s => (DICT[LANG] && DICT[LANG][s]) ? DICT[LANG][s] : (EN_METER[s]||s);
 
@@ -959,7 +1060,7 @@ function applyLang(l){
   TXT.forEach(o=>{const k=o.en.trim(); const D=DICT[l]; o.n.nodeValue = (D&&D[k]) ? o.en.replace(k,D[k]) : o.en});
   PH.forEach(o=>o.e.setAttribute("placeholder", T(o.en)));
   $$(".langsw button").forEach(b=>b.classList.toggle("on",b.dataset.lang===l));
-  document.title = {ru:"Domifind — персональный поиск недвижимости на Кипре", el:"Domifind — Προσωπική αναζήτηση ακινήτων στην Κύπρο"}[l] || "Domifind — Your property search in Cyprus, done for you";
+  document.title = {ru:"Domifind — персональный поиск недвижимости на Кипре", el:"Domifind — Προσωπική αναζήτηση ακινήτων στην Κύπρο", fr:"Domifind — Votre recherche immobilière à Chypre, faite pour vous"}[l] || "Domifind — Your property search in Cyprus, done for you";
   const keepMin=$("#pmin").value, keepMax=$("#pmax").value;
   fillPrices(); $("#pmin").value=keepMin; $("#pmax").value=keepMax; fixMin();
   renderAreas(); renderDlv(); applyTypeRules(); setNext(); update();
@@ -1290,6 +1391,7 @@ function briefText(){
   L.push("🏠 DOMIFIND — NEW PROPERTY BRIEF");
   if(keep==="ru") L.push("🇷🇺 Client used the Russian version of the site");
   if(keep==="el") L.push("🇬🇷 Client used the Greek version of the site");
+  if(keep==="fr") L.push("🇫🇷 Client used the French version of the site");
   L.push("");
   add("Name",$("#name").value.trim()); add("Phone",$("#phone").value.trim()); add("Email",$("#email").value.trim());
   add("Contact by",S.contact); add("Language",S.lang); add("Situation",S.incy); add("Timing",S.when);
@@ -1338,9 +1440,10 @@ fillPrices(); load(); applyTypeRules();
 let savedLang = null;
 try{ savedLang = localStorage.getItem("domifind-lang") }catch(e){}
 const navL=(navigator.language||"").toLowerCase().slice(0,2);
-let startLang = savedLang || (navL==="ru"||navL==="el" ? navL : "en");
+let startLang = savedLang || (["ru","el","fr"].includes(navL) ? navL : "en");
 if(location.hash==="#ru") startLang="ru";
 if(location.hash==="#el") startLang="el";
+if(location.hash==="#fr") startLang="fr";
 if(location.hash==="#en") startLang="en";
 applyLang(startLang);
 </script>
