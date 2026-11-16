@@ -1296,7 +1296,10 @@ function briefText(){
   add("Name",$("#name").value.trim()); add("Phone",$("#phone").value.trim()); add("Email",$("#email").value.trim());
   add("Contact by",S.contact); add("Language",S.lang);
   L.push("");
+  /* short reference: 2 letters + 4 numbers (no I or O, to avoid confusion with 1 and 0); kept for this client's draft */
+  if(!S.ref){ const A="ABCDEFGHJKLMNPQRSTUVWXYZ", r=n=>Math.floor(Math.random()*n); S.ref=A[r(24)]+A[r(24)]+String(r(10000)).padStart(4,"0"); try{save()}catch(e){} }
   L.push("🏠 DOMIFIND — NEW PROPERTY BRIEF");
+  L.push("Ref: "+S.ref);
   if(keep==="ru") L.push("🇷🇺 Client used the Russian version of the site");
   if(keep==="el") L.push("🇬🇷 Client used the Greek version of the site");
   L.push("");
@@ -1314,7 +1317,7 @@ function briefText(){
 function buildReview(){
   const t=briefText(); $("#review").textContent=t;
   $("#sendWa").href=`https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(t)}`;
-  $("#sendEm").href=`mailto:${CONFIG.email}?subject=${encodeURIComponent("Domifind brief — "+($("#name").value||"New client"))}&body=${encodeURIComponent(t)}`;
+  $("#sendEm").href=`mailto:${CONFIG.email}?subject=${encodeURIComponent("Domifind brief "+S.ref+" — "+($("#name").value||"New client"))}&body=${encodeURIComponent(t)}`;
   $("#emAddr").textContent=CONFIG.email;
   $("#sendEm").style.display = CONFIG.email ? "" : "none";
 }
