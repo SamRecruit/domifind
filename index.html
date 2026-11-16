@@ -1297,9 +1297,7 @@ function briefText(){
   if(keep==="ru") L.push("🇷🇺 Client used the Russian version of the site");
   if(keep==="el") L.push("🇬🇷 Client used the Greek version of the site");
   L.push("");
-  /* name and phone in bold: *text* is bold in WhatsApp */
-  const nm=$("#name").value.trim(), ph=$("#phone").value.trim();
-  if(nm) L.push(`*Name: ${nm}*`); L.push(""); if(ph) L.push(`*Phone: ${ph}*`); L.push(""); add("Email",$("#email").value.trim());
+  add("Name",$("#name").value.trim()); L.push(""); add("Phone",$("#phone").value.trim()); L.push(""); add("Email",$("#email").value.trim());
   add("Contact by",S.contact); add("Language",S.lang); add("Situation",S.incy); add("Timing",S.when);
   L.push("");
   add("Looking to",S.deal); add("Property type",S.types); add("Purpose",S.purpose); add("Condition",S.condition); if(S.condition.includes(OFFPLAN)) add("Max delivery time",S.delivery);
@@ -1312,9 +1310,7 @@ function briefText(){
   return L.join("\n").replace(/\n{3,}/g,"\n\n");
 }
 function buildReview(){
-  const t=briefText();
-  const esc=x=>x.replace(/[&<>]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));
-  $("#review").innerHTML=esc(t).split("\n").map(l=>/^\*.+\*$/.test(l)?`<b>${l.slice(1,-1)}</b>`:l).join("\n");
+  const t=briefText(); $("#review").textContent=t;
   $("#sendWa").href=`https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(t)}`;
   $("#sendEm").href=`mailto:${CONFIG.email}?subject=${encodeURIComponent("Domifind brief — "+($("#name").value||"New client"))}&body=${encodeURIComponent(t)}`;
   $("#emAddr").textContent=CONFIG.email;
