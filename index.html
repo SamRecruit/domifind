@@ -1001,7 +1001,7 @@ function fillPrices(){
   /* the minimum is preselected: €150,000 when buying (€100,000 for plots / land), €500/month when renting */
   const floor = S.deal!=="Buy" ? 0 : S.types.includes("Plot / Land") ? 100000 : 150000;
   $("#pmin").innerHTML = vals.filter(v=>v>=floor).map(v=>`<option value="${v}">${fmt(v)}${suf}</option>`).join("");
-  $("#pmax").innerHTML = `<option value="" disabled selected hidden>${T("Select maximum")}</option>`+vals.map(v=>`<option value="${v}">${fmt(v)}${suf}</option>`).join("")+(S.deal==="Buy"?`<option value="99999999">€10M+</option>`:"");
+  $("#pmax").innerHTML = `<option value="" disabled selected hidden>${T("Select maximum")}</option>`+vals.filter(v=>v>floor).map(v=>`<option value="${v}">${fmt(v)}${suf}</option>`).join("")+(S.deal==="Buy"?`<option value="99999999">€10M+</option>`:"");
   $("#budgetHint").textContent = T(S.deal==="Buy" ? "Your purchase budget in euros." : "Your monthly rent budget in euros.");
   $("#financeQ").style.display = S.deal==="Buy" ? "" : "none";
   syncMax();
@@ -1019,8 +1019,9 @@ function fixMin(){ if($("#pmin").selectedIndex<0) $("#pmin").selectedIndex=0; sy
 /* the maximum can't be lower than the minimum */
 function syncMax(){
   const min=+$("#pmin").value||0;
-  [...$("#pmax").options].forEach(o=>{ o.disabled = !!o.value && +o.value < min; });
-  if($("#pmax").value && +$("#pmax").value < min) $("#pmax").value="";
+  /* the maximum only offers amounts above the chosen minimum */
+  [...$("#pmax").options].forEach(o=>{ const off = !!o.value && +o.value <= min; o.disabled=off; o.hidden=off; });
+  if($("#pmax").value && +$("#pmax").value <= min) $("#pmax").value="";
 }
 
 /* multi / single / tri chips */
