@@ -1339,7 +1339,7 @@ $("#validateBtn").onclick=async()=>{
   try{
     const r=await fetch("https://api.web3forms.com/submit",{method:"POST",headers:{"Content-Type":"application/json",Accept:"application/json"},
       body:JSON.stringify({access_key:CONFIG.formKey,subject:`Domifind brief ${S.ref} — ${nm||"New client"}`,from_name:"Domifind website",
-        name:nm,phone:$("#phone").value.trim(),email:$("#email").value.trim()||undefined,message:t})});
+        replyto:$("#email").value.trim()||undefined,message:t})});   /* contact details are already inside the brief, so they are not sent twice */
     const j=await r.json().catch(()=>({}));
     if(!r.ok||!j.success) throw new Error(j.message||"failed");
     $("#sentRef").textContent=S.ref; $("#sendArea").hidden=true; $("#sentBox").hidden=false;
