@@ -206,16 +206,18 @@ textarea{min-height:96px;resize:vertical}
 .q.row.missing-box select{outline:2px solid #F3B9A3;outline-offset:6px}
 .q.row > .inline-err{grid-column:1/-1;margin-top:4px}
 .inline-err{display:none;color:#C2412D;font-size:.86rem;font-weight:600;margin-top:12px}
-.legend{display:grid;grid-template-columns:repeat(3,1fr);margin:14px 0 28px;border:2px solid var(--line);border-radius:16px;overflow:hidden}
-.lg{position:relative;display:flex;flex-direction:column;justify-content:center;gap:4px;padding:16px 18px}
-.lg b{font-size:.92rem;font-weight:700;opacity:.9}
-.lg-res{display:flex;align-items:center;gap:8px;font-family:Fraunces,Georgia,serif;font-size:1.35rem;font-weight:700;line-height:1.2}
-.lg-ic{font-size:1.25rem;line-height:1}
-.lg.nice{background:var(--sea);color:#fff}
-.lg.must{background:var(--terra);color:#fff}
-.lg.clr{background:#F3F1EC;color:#6B777B}
-.lg.nice::after,.lg.must::after{content:"›";position:absolute;right:-13px;top:50%;transform:translateY(-50%);width:26px;height:26px;border-radius:50%;background:#fff;color:var(--ink);display:grid;place-items:center;font-weight:800;font-size:1.1rem;z-index:2;box-shadow:0 1px 4px rgba(0,0,0,.2)}
-@media(max-width:700px){.legend{grid-template-columns:1fr}.lg.nice::after,.lg.must::after{content:"⌄";right:auto;left:50%;top:auto;bottom:-13px;transform:translateX(-50%);line-height:.6}}
+.legend{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:14px 0 28px}
+.lg{background:#fff;border:2px solid var(--line);border-radius:16px;padding:16px}
+.lg.nice{border-color:var(--sea)} .lg.must{border:3px solid var(--terra);padding:15px}
+.lg-top{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.lg-ic{flex:0 0 auto;width:38px;height:38px;border-radius:50%;display:grid;place-items:center;color:#fff;font-size:1.15rem;font-weight:800;background:#B8C0C2}
+.lg.nice .lg-ic{background:var(--sea)} .lg-thumb{font-size:1.25rem} .lg.must .lg-ic{background:var(--terra)}
+.lg-res{font-family:Fraunces,Georgia,serif;font-size:1.3rem;font-weight:700;line-height:1.15;color:#6B777B}
+.lg.nice .lg-res{color:var(--sea)} .lg.must .lg-res{color:var(--terra)}
+.lg p{margin:0;font-size:.9rem;color:var(--muted);line-height:1.45}
+.lg p b{color:var(--ink);font-weight:700;margin-right:5px}
+.lg p b::after{content:"."}
+@media(max-width:700px){.legend{grid-template-columns:1fr}}
 .err{color:#C2412D;font-size:.88rem;font-weight:600;margin-top:8px;display:none}
 
 /* WHY / FAQ */
@@ -536,9 +538,9 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px;
         <div class="pane" data-pane="3">
           <h3>Must-haves & nice-to-haves</h3>
           <div class="legend">
-            <div class="lg nice"><b>Tap once</b><span class="lg-res"><span class="lg-ic">👍</span><span>Nice to have</span></span></div>
-            <div class="lg must"><b>Tap twice</b><span class="lg-res"><span class="lg-ic">★</span><span>Must have</span></span></div>
-            <div class="lg clr"><b>Tap again</b><span class="lg-res"><span>Clear</span></span></div>
+            <div class="lg nice"><div class="lg-top"><span class="lg-ic lg-thumb">👍</span><span class="lg-res">Nice to have</span></div><p><b>Tap once</b><span>A plus, but I can live without it.</span></p></div>
+            <div class="lg must"><div class="lg-top"><span class="lg-ic">★</span><span class="lg-res">Must have</span></div><p><b>Tap twice</b><span>Essential, no compromise.</span></p></div>
+            <div class="lg clr"><div class="lg-top"><span class="lg-ic">↺</span><span class="lg-res">Clear</span></div><p><b>Tap again</b><span>Not important to me.</span></p></div>
           </div>
           <div class="q">
             <label class="t">Outdoor & views</label>
@@ -784,7 +786,7 @@ const RU = {
 "I can stretch ~10% for the right property":"Могу добавить ~10% за подходящий объект",
 "Financing":"Финансирование","Cash":"Наличные","Mortgage approved":"Ипотека одобрена","Need mortgage help":"Нужна помощь с ипотекой","Not sure yet":"Пока не знаю",
 "Bedrooms":"Спальни","Bathrooms":"Ванные","Min. covered area (m²)":"Мин. крытая площадь (м²)","e.g. 120":"например, 120","Min. plot / garden (m²)":"Мин. участок / сад (м²)","optional":"необязательно",
-"Must-haves & nice-to-haves":"Обязательно и желательно","Tap once":"Одно нажатие","Nice to have":"Желательно","Tap twice":"Два нажатия","Must have":"Обязательно","Tap again":"Ещё раз","Clear":"Сбросить","Tap once =":"Одно нажатие =","nice to have":"желательно",". Tap twice =":". Два нажатия =","must have":"обязательно",". Tap again to clear.":". Ещё раз — сбросить.",
+"Must-haves & nice-to-haves":"Обязательно и желательно","Tap once":"Одно нажатие","Nice to have":"Желательно","Tap twice":"Два нажатия","Must have":"Обязательно","Tap again":"Ещё раз","Clear":"Сбросить","A plus, but I can live without it.":"Плюс, но можно обойтись и без этого.","Essential, no compromise.":"Обязательно, без компромиссов.","Not important to me.":"Для меня не важно.","Tap once =":"Одно нажатие =","nice to have":"желательно",". Tap twice =":". Два нажатия =","must have":"обязательно",". Tap again to clear.":". Ещё раз — сбросить.",
 "Outdoor & views":"Снаружи и виды","Private pool":"Свой бассейн","Communal pool":"Общий бассейн","Garden":"Сад","Large veranda":"Большая веранда","Roof garden":"Сад на крыше","BBQ area":"Зона барбекю",
 "Building & comfort":"Здание и комфорт","Covered parking":"Крытая парковка","2+ parking":"2+ парковки","2+ parking spaces":"2+ парковки","Storage":"Кладовая","Storage room":"Кладовая","Elevator":"Лифт","Central A/C":"Центральный кондиционер","Underfloor heating":"Тёплый пол","Solar / PV":"Солнечные панели","Solar panels / PV":"Солнечные панели","Energy class A":"Энергокласс A","Smart home":"Умный дом","Gym":"Спортзал","Concierge / security":"Консьерж / охрана","Home office":"Кабинет","Home office room":"Кабинет","Maid's room":"Комната для персонала",
 "Practical":"Практичное","Title deeds available":"Есть титул собственности","Furnished":"С мебелью","Unfurnished":"Без мебели","Pet friendly":"Можно с животными","Ground floor / no stairs":"Первый этаж / без лестниц","Accessible":"Доступно для колясок","Wheelchair accessible":"Доступно для колясок","Rental potential":"Потенциал аренды","Rental income potential":"Потенциал аренды",
@@ -875,7 +877,7 @@ const EL = {
 "I can stretch ~10% for the right property":"Μπορώ να αυξήσω ~10% για το σωστό ακίνητο",
 "Financing":"Χρηματοδότηση","Cash":"Μετρητά","Mortgage approved":"Εγκεκριμένο δάνειο","Need mortgage help":"Χρειάζομαι βοήθεια με δάνειο","Not sure yet":"Δεν ξέρω ακόμα",
 "Bedrooms":"Υπνοδωμάτια","Bathrooms":"Μπάνια","Min. covered area (m²)":"Ελάχ. καλυμμένο εμβαδόν (m²)","e.g. 120":"π.χ. 120","Min. plot / garden (m²)":"Ελάχ. οικόπεδο / κήπος (m²)","optional":"προαιρετικό",
-"Must-haves & nice-to-haves":"Απαραίτητα & επιθυμητά","Tap once":"Ένα πάτημα","Nice to have":"Επιθυμητό","Tap twice":"Δύο πατήματα","Must have":"Απαραίτητο","Tap again":"Ξανά","Clear":"Ακύρωση","Tap once =":"Ένα πάτημα =","nice to have":"επιθυμητό",". Tap twice =":". Δύο πατήματα =","must have":"απαραίτητο",". Tap again to clear.":". Ξανά για ακύρωση.",
+"Must-haves & nice-to-haves":"Απαραίτητα & επιθυμητά","Tap once":"Ένα πάτημα","Nice to have":"Επιθυμητό","Tap twice":"Δύο πατήματα","Must have":"Απαραίτητο","Tap again":"Ξανά","Clear":"Ακύρωση","A plus, but I can live without it.":"Ένα πλεονέκτημα, αλλά μπορώ και χωρίς αυτό.","Essential, no compromise.":"Απαραίτητο, χωρίς συμβιβασμούς.","Not important to me.":"Δεν είναι σημαντικό για μένα.","Tap once =":"Ένα πάτημα =","nice to have":"επιθυμητό",". Tap twice =":". Δύο πατήματα =","must have":"απαραίτητο",". Tap again to clear.":". Ξανά για ακύρωση.",
 "Outdoor & views":"Εξωτερικοί χώροι & θέα","Private pool":"Ιδιωτική πισίνα","Communal pool":"Κοινόχρηστη πισίνα","Garden":"Κήπος","Large veranda":"Μεγάλη βεράντα","Roof garden":"Ταράτσα-κήπος","BBQ area":"Χώρος BBQ",
 "Building & comfort":"Κτίριο & άνεση","Covered parking":"Στεγασμένος χώρος στάθμευσης","2+ parking":"2+ θέσεις στάθμευσης","2+ parking spaces":"2+ θέσεις στάθμευσης","Storage":"Αποθήκη","Storage room":"Αποθήκη","Elevator":"Ανελκυστήρας","Central A/C":"Κεντρικός κλιματισμός","Underfloor heating":"Ενδοδαπέδια θέρμανση","Solar / PV":"Φωτοβολταϊκά","Solar panels / PV":"Φωτοβολταϊκά","Energy class A":"Ενεργειακή κλάση Α","Smart home":"Έξυπνο σπίτι","Gym":"Γυμναστήριο","Concierge / security":"Θυρωρός / ασφάλεια","Home office":"Γραφείο στο σπίτι","Home office room":"Γραφείο στο σπίτι","Maid's room":"Δωμάτιο βοηθού",
 "Practical":"Πρακτικά","Title deeds available":"Διαθέσιμος τίτλος ιδιοκτησίας","Furnished":"Επιπλωμένο","Unfurnished":"Χωρίς έπιπλα","Pet friendly":"Επιτρέπονται κατοικίδια","Ground floor / no stairs":"Ισόγειο / χωρίς σκάλες","Accessible":"Προσβάσιμο σε ΑμεΑ","Wheelchair accessible":"Προσβάσιμο σε ΑμεΑ","Rental potential":"Δυνατότητα ενοικίασης","Rental income potential":"Δυνατότητα ενοικίασης",
