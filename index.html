@@ -182,9 +182,16 @@ textarea{min-height:96px;resize:vertical}
 @media(max-width:620px){.send-grid{grid-template-columns:1fr}}
 .send{border-radius:16px;padding:18px;text-align:center;font-weight:700;text-decoration:none;border:none;font-size:1rem;display:flex;flex-direction:column;align-items:center;gap:6px}
 .send small{font-weight:500;font-size:.78rem;opacity:.85}
-.send.wa{background:#25D366;color:#fff}
-.send.em{background:var(--sea);color:#fff}
-.send.cp{background:#fff;color:var(--sea);border:1.5px solid var(--sea)}
+.send.ok{width:100%;margin-top:18px;background:var(--terra);color:#fff;font-size:1.25rem;padding:20px;cursor:pointer;transition:.15s}
+.send.ok:hover{filter:brightness(1.05);transform:translateY(-1px)}
+.send.ok:disabled{opacity:.7;cursor:wait;transform:none}
+.send-err{display:none;color:#C2412D;font-weight:600;font-size:.9rem;text-align:center;margin:10px 0 0}
+.alt-send{text-align:center;color:var(--muted);font-size:.9rem;margin:12px 0 0}
+.alt-send a{color:var(--sea);font-weight:600}
+.sent-box{text-align:center;background:#EEF6F1;border:2px solid #3E9B6B;border-radius:16px;padding:26px 18px;margin-top:18px}
+.sent-ic{width:54px;height:54px;border-radius:50%;background:#3E9B6B;color:#fff;font-size:1.7rem;font-weight:800;display:grid;place-items:center;margin:0 auto 10px}
+.sent-box h4{font-family:Fraunces,Georgia,serif;font-size:1.5rem;color:var(--sea);margin:0 0 6px}
+.sent-box p{margin:4px 0;font-size:1.02rem} .sent-box b{color:var(--terra)} .sent-sub{color:var(--muted)}
 .success{display:none;text-align:center;padding:30px 10px}
 .success .tick{width:74px;height:74px;border-radius:50%;background:#E2F4EC;color:#1F8A5B;font-size:2.2rem;display:grid;place-items:center;margin:0 auto 14px}
 .q.missing label.t,.q.missing .field-l{color:#C2412D}
@@ -642,10 +649,16 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px;
             <h3>Your brief is ready</h3>
             <p class="hint">Check it below, then send it in one tap. We'll confirm within 24 hours and start searching.</p>
             <div class="review" id="review" data-dyn></div>
-            <div class="send-grid">
-              <a class="send wa" id="sendWa" href="#" target="_blank" rel="noopener">💬 Send on WhatsApp<small>Fastest reply</small></a>
-              <a class="send em" id="sendEm" href="#">✉️ Send by email<small id="emAddr" data-dyn></small></a>
-              <button class="send cp" id="copyBtn">📋 Copy my brief<small>Paste it anywhere</small></button>
+            <div id="sendArea">
+              <button class="send ok" id="validateBtn"><span data-dyn id="validateLbl">✓ Validate</span><small>Send my brief to Domifind</small></button>
+              <p class="send-err" id="sendErr" data-dyn></p>
+              <p class="alt-send"><span>or</span> <a id="sendWa" href="#" target="_blank" rel="noopener">send it on WhatsApp</a></p>
+            </div>
+            <div class="sent-box" id="sentBox" hidden>
+              <div class="sent-ic">✓</div>
+              <h4>Thank you!</h4>
+              <p><span>Your request</span> <b id="sentRef" data-dyn></b> <span>has been received.</span></p>
+              <p class="sent-sub">We'll contact you within 24 hours.</p>
             </div>
           </div>
         </div>
@@ -728,11 +741,12 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px;
 /* ===== CONFIG: put your real contact details here ===== */
 const CONFIG = {
   whatsapp: "35795564882",          // international format, digits only (e.g. 35799123456)
-  email: ""                     // add the Domifind email here when it exists, e.g. "hello@domifind.com"
+  email: "hello@domifind.net",
+  formKey: "016c8005-a910-4f27-a973-7e5f97c745e1"   // Web3Forms key: briefs are emailed to the Domifind inbox
 };
 
 /* ===== RUSSIAN ===== */
-const RU = {
+const RU = {"✓ Validate":"✓ Подтвердить","Send my brief to Domifind":"Отправить заявку в Domifind","or":"или","send it on WhatsApp":"отправить в WhatsApp","Thank you!":"Спасибо!","Your request":"Ваша заявка","has been received.":"получена.","We'll contact you within 24 hours.":"Мы свяжемся с вами в течение 24 часов.","Sending…":"Отправка…","Something went wrong. Please try again, or send it on WhatsApp.":"Что-то пошло не так. Попробуйте ещё раз или отправьте в WhatsApp.",
 "How it works":"Как это работает","Why Domifind":"Почему Domifind","FAQ":"Вопросы","Start my search":"Начать поиск",
 "Your home, found.":"Ваш дом найден.",
 "Personal property search across Cyprus":"Персональный поиск недвижимости по всему Кипру",
@@ -823,7 +837,7 @@ const RU = {
 "meter0":"Заявка заполнена на {p}%. Продолжайте","meter1":"Заявка заполнена на {p}%. Отлично","meter2":"Заявка готова ✓ Можно отправлять"
 };
 const EN_METER = {meter0:"Brief {p}% complete. Keep going",meter1:"Brief {p}% complete. Looking good",meter2:"Brief complete ✓ Ready to send"};
-const EL = {
+const EL = {"✓ Validate":"✓ Επιβεβαίωση","Send my brief to Domifind":"Αποστολή του αιτήματος στη Domifind","or":"ή","send it on WhatsApp":"στείλτε το στο WhatsApp","Thank you!":"Ευχαριστούμε!","Your request":"Το αίτημά σας","has been received.":"ελήφθη.","We'll contact you within 24 hours.":"Θα επικοινωνήσουμε μαζί σας μέσα σε 24 ώρες.","Sending…":"Αποστολή…","Something went wrong. Please try again, or send it on WhatsApp.":"Κάτι πήγε στραβά. Δοκιμάστε ξανά ή στείλτε το στο WhatsApp.",
 "How it works":"Πώς λειτουργεί","Why Domifind":"Γιατί Domifind","FAQ":"Συχνές ερωτήσεις","Start my search":"Ξεκινήστε την αναζήτηση",
 "Your home, found.":"Το σπίτι σας, βρέθηκε.",
 "Personal property search across Cyprus":"Προσωπική αναζήτηση ακινήτων σε όλη την Κύπρο",
@@ -1317,13 +1331,23 @@ function briefText(){
 function buildReview(){
   const t=briefText(); $("#review").textContent=t;
   $("#sendWa").href=`https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(t)}`;
-  $("#sendEm").href=`mailto:${CONFIG.email}?subject=${encodeURIComponent("Domifind brief "+S.ref+" — "+($("#name").value||"New client"))}&body=${encodeURIComponent(t)}`;
-  $("#emAddr").textContent=CONFIG.email;
-  $("#sendEm").style.display = CONFIG.email ? "" : "none";
 }
-$("#copyBtn").onclick=async()=>{
-  try{await navigator.clipboard.writeText(briefText()); toast(T("Brief copied ✓"))}
-  catch(e){const r=document.createRange();r.selectNodeContents($("#review"));const s=getSelection();s.removeAllRanges();s.addRange(r);toast(T("Selected. Press Ctrl/Cmd+C to copy"))}
+/* Validate: email the brief to Domifind (Web3Forms) and show a thank-you message */
+$("#validateBtn").onclick=async()=>{
+  const btn=$("#validateBtn"), err=$("#sendErr"), t=briefText(), nm=$("#name").value.trim();
+  btn.disabled=true; $("#validateLbl").textContent=T("Sending…"); err.style.display="none";
+  try{
+    const r=await fetch("https://api.web3forms.com/submit",{method:"POST",headers:{"Content-Type":"application/json",Accept:"application/json"},
+      body:JSON.stringify({access_key:CONFIG.formKey,subject:`Domifind brief ${S.ref} — ${nm||"New client"}`,from_name:"Domifind website",
+        name:nm,phone:$("#phone").value.trim(),email:$("#email").value.trim()||undefined,message:t})});
+    const j=await r.json().catch(()=>({}));
+    if(!r.ok||!j.success) throw new Error(j.message||"failed");
+    $("#sentRef").textContent=S.ref; $("#sendArea").hidden=true; $("#sentBox").hidden=false;
+    $("#sentBox").scrollIntoView({behavior:"smooth",block:"center"});
+    try{localStorage.removeItem("domifind-draft-v2")}catch(e){}
+  }catch(e){
+    err.textContent=T("Something went wrong. Please try again, or send it on WhatsApp."); err.style.display="block";
+  }finally{ btn.disabled=false; $("#validateLbl").textContent=T("✓ Validate"); }
 };
 function toast(m){const t=$("#toast");t.textContent=m;t.classList.add("show");setTimeout(()=>t.classList.remove("show"),2200)}
 
