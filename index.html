@@ -57,6 +57,7 @@ nav .wrap{display:flex;align-items:center;justify-content:space-between;height:6
 .hero h1{font-size:clamp(2.4rem,5vw,3.9rem);line-height:1.05;margin:18px 0 18px}
 .hero h1 em{font-style:italic;color:var(--terra)}
 .hero p.lead{font-size:1.15rem;color:var(--muted);max-width:520px}
+.lead-q{display:block;font-family:Fraunces,Georgia,serif;font-size:1.65rem;font-weight:700;color:var(--sea);line-height:1.2;margin-bottom:8px}
 .hero-cta{display:flex;gap:12px;flex-wrap:wrap;margin:28px 0 22px}
 .timesave{display:inline-flex;align-items:center;gap:12px;background:#fff;border:1.5px solid #F1CDBB;border-radius:16px;padding:10px 18px 10px 10px;margin-bottom:18px;font-family:Fraunces,Georgia,serif;font-size:1.35rem;font-weight:600;color:var(--sea)}
 .timesave .ic{width:40px;height:40px;border-radius:12px;background:#FDF1EB;display:grid;place-items:center;font-size:1.25rem}
@@ -261,7 +262,7 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px;
     <div>
       <span class="eyebrow"><i></i> Personal property search across Cyprus</span>
       <h1>Tell us once.<br>We search <em>everything.</em></h1>
-      <p class="lead">No time to search? Good, that's our job. You spend 3 minutes. We spend the hours: every agency, every listing, every viewing. You get only the best matches, and pay nothing until you decide.</p>
+      <p class="lead"><strong class="lead-q">Too busy to search?</strong> Good, that's our job. You spend 3 minutes. We spend the hours: every agency, every listing, every viewing. You get only the best matches, and pay nothing until you decide.</p>
       <div class="hero-cta">
         <a href="#brief" class="btn btn-primary">Describe my ideal property →</a>
         <a href="#how" class="btn btn-ghost">See how it works</a>
@@ -737,7 +738,7 @@ const RU = {
 "Your home, found.":"Ваш дом найден.",
 "Personal property search across Cyprus":"Персональный поиск недвижимости по всему Кипру",
 "Tell us once.":"Расскажите один раз.","We search":"Мы ищем","everything.":"везде.",
-"No time to search? Good, that's our job. You spend 3 minutes. We spend the hours: every agency, every listing, every viewing. You get only the best matches, and pay nothing until you decide.":"Нет времени на поиски? Отлично, это наша работа. Вы тратите 3 минуты. Мы тратим часы: все агентства, все объявления, все просмотры. Вы получаете только лучшие варианты и ничего не платите, пока не решите.",
+"Too busy to search?":"Слишком заняты, чтобы искать?","Good, that's our job. You spend 3 minutes. We spend the hours: every agency, every listing, every viewing. You get only the best matches, and pay nothing until you decide.":"Отлично, это наша работа. Вы тратите 3 минуты. Мы тратим часы: все агентства, все объявления, все просмотры. Вы получаете только лучшие варианты и ничего не платите, пока не решите.",
 "Describe my ideal property →":"Описать мой идеальный объект →","See how it works":"Как это работает",
 "upfront":"предоплаты","brief, not 50 calls":"заявка вместо 50 звонков","All districts":"Все районы","of Cyprus":"Кипра",
 "Save 50+ hours of searching":"Сэкономьте 50+ часов поиска","Shortlist ready":"Подборка готова","5 best matches, Limassol":"5 лучших вариантов, Лимассол","Pre-visited for you":"Просмотрено за вас","Only properties worth seeing":"Только объекты, достойные внимания",
@@ -828,7 +829,7 @@ const EL = {
 "Your home, found.":"Το σπίτι σας, βρέθηκε.",
 "Personal property search across Cyprus":"Προσωπική αναζήτηση ακινήτων σε όλη την Κύπρο",
 "Tell us once.":"Πείτε μας το μία φορά.","We search":"Εμείς ψάχνουμε","everything.":"παντού.",
-"No time to search? Good, that's our job. You spend 3 minutes. We spend the hours: every agency, every listing, every viewing. You get only the best matches, and pay nothing until you decide.":"Δεν έχετε χρόνο για ψάξιμο; Τέλεια, αυτή είναι η δουλειά μας. Εσείς διαθέτετε 3 λεπτά. Εμείς τις ώρες: κάθε γραφείο, κάθε αγγελία, κάθε επίσκεψη. Παίρνετε μόνο τις καλύτερες επιλογές και δεν πληρώνετε τίποτα μέχρι να αποφασίσετε.",
+"Too busy to search?":"Πολύ απασχολημένοι για ψάξιμο;","Good, that's our job. You spend 3 minutes. We spend the hours: every agency, every listing, every viewing. You get only the best matches, and pay nothing until you decide.":"Τέλεια, αυτή είναι η δουλειά μας. Εσείς διαθέτετε 3 λεπτά. Εμείς τις ώρες: κάθε γραφείο, κάθε αγγελία, κάθε επίσκεψη. Παίρνετε μόνο τις καλύτερες επιλογές και δεν πληρώνετε τίποτα μέχρι να αποφασίσετε.",
 "Describe my ideal property →":"Περιγράψτε το ιδανικό ακίνητο →","See how it works":"Δείτε πώς λειτουργεί",
 "upfront":"προκαταβολή","brief, not 50 calls":"αίτημα, όχι 50 τηλέφωνα","All districts":"Όλες οι επαρχίες","of Cyprus":"της Κύπρου",
 "Save 50+ hours of searching":"Κερδίστε 50+ ώρες αναζήτησης","Shortlist ready":"Η επιλογή είναι έτοιμη","5 best matches, Limassol":"5 καλύτερες επιλογές, Λεμεσός","Pre-visited for you":"Τα επισκεφθήκαμε για εσάς","Only properties worth seeing":"Μόνο ακίνητα που αξίζουν",
