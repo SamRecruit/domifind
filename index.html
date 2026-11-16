@@ -264,7 +264,7 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px;
       <a href="#how">How it works</a>
       <a href="#why">Why Domifind</a>
       <a href="#faq">FAQ</a>
-      <a href="#brief" class="btn btn-primary btn-sm">Start my search</a>
+      <a href="#brief" class="btn btn-primary btn-sm" id="navStart">Start my search</a>
     </div>
   </div>
 </nav>
@@ -1339,6 +1339,8 @@ function buildReview(){
 }
 let SENT=false;
 /* New search: empty the form (the language is kept) and go back to its first step */
+/* All "Start my search" / "Describe my ideal property" buttons: after a request is sent it starts a fresh search; otherwise it opens the form (at step 1 if the client was on the last step) */
+$$('a[href="#brief"]').forEach(a=>a.addEventListener("click",e=>{ if(SENT){ e.preventDefault(); $("#newSearch").click(); } else if(step===5){ e.preventDefault(); go(0); } }));
 $("#newSearch").onclick=()=>{ try{localStorage.removeItem("domifind-draft-v2")}catch(e){} location.hash="brief"; location.reload(); };
 /* Validate: email the brief to Domifind (Web3Forms) and show a thank-you message */
 $("#validateBtn").onclick=async()=>{
@@ -1362,7 +1364,7 @@ function toast(m){const t=$("#toast");t.textContent=m;t.classList.add("show");se
 
 /* Draft memory (this browser only) */
 const FIELDS=["pmin","pmax","area","plot","near","nogo","notes","name","phone","email"];
-function save(){try{localStorage.setItem("domifind-draft-v2",JSON.stringify({S,f:Object.fromEntries(FIELDS.map(i=>[i,$("#"+i).value])),flex:$("#flex").checked}))}catch(e){}}
+function save(){if(typeof SENT!=="undefined"&&SENT)return;try{localStorage.setItem("domifind-draft-v2",JSON.stringify({S,f:Object.fromEntries(FIELDS.map(i=>[i,$("#"+i).value])),flex:$("#flex").checked}))}catch(e){}}
 function load(){
   try{
     const d=JSON.parse(localStorage.getItem("domifind-draft-v2")||"null"); if(!d) return;
