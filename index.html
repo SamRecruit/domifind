@@ -647,9 +647,9 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px;
         <!-- STEP 6 -->
         <div class="pane" data-pane="5">
           <div id="sendBox">
-            <h3>Your brief is ready</h3>
-            <p class="hint">Check it below, then send it in one tap. We'll confirm within 48 hours and start searching.</p>
-            <div class="review" id="review" data-dyn></div>
+            <h3 class="pre-send">Your brief is ready</h3>
+            <p class="hint pre-send">Check it below, then send it in one tap. We'll confirm within 48 hours and start searching.</p>
+            <div class="review pre-send" id="review" data-dyn></div>
             <div id="sendArea">
               <button class="send ok" id="validateBtn"><span data-dyn id="validateLbl">✓ Validate</span><small>Send my brief to Domifind</small></button>
               <p class="send-err" id="sendErr" data-dyn></p>
@@ -1351,7 +1351,7 @@ $("#validateBtn").onclick=async()=>{
     const j=await r.json().catch(()=>({}));
     if(!r.ok||!j.success) throw new Error(j.message||"failed");
     $("#sentRef").textContent=S.ref; $("#sendArea").hidden=true; $("#sentBox").hidden=false;
-    SENT=true; $(".nav-btns").style.display="none"; $("#meterL").textContent=T("Request sent ✓");
+    SENT=true; $(".nav-btns").style.display="none"; $$(".pre-send").forEach(e=>e.style.display="none"); $("#meterL").textContent=T("Request sent ✓");
     $("#sentBox").scrollIntoView({behavior:"smooth",block:"center"});
     try{localStorage.removeItem("domifind-draft-v2")}catch(e){}
   }catch(e){
