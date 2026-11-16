@@ -213,6 +213,11 @@ textarea{min-height:96px;resize:vertical}
 .q.row.missing-box{outline:none}
 .q.row.missing-box select{outline:2px solid #F3B9A3;outline-offset:6px}
 .q.row > .inline-err{grid-column:1/-1;margin-top:4px}
+.q.row.budget-line{display:flex;flex-wrap:wrap;align-items:center;gap:12px}
+.budget-line .bl-t{font-size:1.1rem;font-weight:600;color:var(--ink)}
+.budget-line select{flex:1 1 200px;min-width:0}
+.budget-line > .inline-err{flex-basis:100%}
+@media(max-width:620px){.budget-line select{flex:1 1 calc(100% - 100px)} .budget-line .bl-t{flex:0 0 84px}}
 .inline-err{display:none;color:#C2412D;font-size:.86rem;font-weight:600;margin-top:12px}
 .legend{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:14px 0 28px}
 .lg{display:flex;align-items:center;gap:12px;background:var(--sand);border:1.5px solid var(--line);border-radius:16px;padding:16px 14px}
@@ -499,9 +504,9 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px;
         <div class="pane" data-pane="2">
           <h3>Budget & size</h3>
           <p class="hint" id="budgetHint" data-dyn>Your purchase budget in euros.</p>
-          <div class="q row">
-            <div><span class="field-l">Minimum</span><select id="pmin" data-dyn></select></div>
-            <div><span class="field-l">Maximum</span><select id="pmax" data-dyn></select></div>
+          <div class="q row budget-line">
+            <span class="bl-t">Between</span><select id="pmin" data-dyn aria-label="Minimum"></select>
+            <span class="bl-t">and</span><select id="pmax" data-dyn aria-label="Maximum"></select>
           </div>
           <div class="q">
             <label class="toggle"><input type="checkbox" id="flex"> I can stretch ~10% for the right property</label>
@@ -751,7 +756,7 @@ const CONFIG = {
 };
 
 /* ===== RUSSIAN ===== */
-const RU = {"We'll contact you within 48 hours.":"Мы свяжемся с вами в течение 48 часов.","Start a new search":"Начать новый поиск","Back to homepage":"На главную","Request sent ✓":"Заявка отправлена ✓","✓ Validate":"✓ Подтвердить","Send my brief to Domifind":"Отправить заявку в Domifind","or":"или","send it on WhatsApp":"отправить в WhatsApp","Thank you!":"Спасибо!","Your request":"Ваша заявка","has been received.":"получена.","We'll contact you within 24 hours.":"Мы свяжемся с вами в течение 24 часов.","Sending…":"Отправка…","Something went wrong. Please try again, or send it on WhatsApp.":"Что-то пошло не так. Попробуйте ещё раз или отправьте в WhatsApp.",
+const RU = {"Between":"От","and":"до","We'll contact you within 48 hours.":"Мы свяжемся с вами в течение 48 часов.","Start a new search":"Начать новый поиск","Back to homepage":"На главную","Request sent ✓":"Заявка отправлена ✓","✓ Validate":"✓ Подтвердить","Send my brief to Domifind":"Отправить заявку в Domifind","or":"или","send it on WhatsApp":"отправить в WhatsApp","Thank you!":"Спасибо!","Your request":"Ваша заявка","has been received.":"получена.","We'll contact you within 24 hours.":"Мы свяжемся с вами в течение 24 часов.","Sending…":"Отправка…","Something went wrong. Please try again, or send it on WhatsApp.":"Что-то пошло не так. Попробуйте ещё раз или отправьте в WhatsApp.",
 "How it works":"Как это работает","Why Domifind":"Почему Domifind","FAQ":"Вопросы","Start my search":"Начать поиск",
 "Your home, found.":"Ваш дом найден.",
 "Personal property search across Cyprus":"Персональный поиск недвижимости по всему Кипру",
@@ -842,7 +847,7 @@ const RU = {"We'll contact you within 48 hours.":"Мы свяжемся с ва�
 "meter0":"Заявка заполнена на {p}%. Продолжайте","meter1":"Заявка заполнена на {p}%. Отлично","meter2":"Заявка готова ✓ Можно отправлять"
 };
 const EN_METER = {meter0:"Brief {p}% complete. Keep going",meter1:"Brief {p}% complete. Looking good",meter2:"Brief complete ✓ Ready to send"};
-const EL = {"We'll contact you within 48 hours.":"Θα επικοινωνήσουμε μαζί σας μέσα σε 48 ώρες.","Start a new search":"Νέα αναζήτηση","Back to homepage":"Αρχική σελίδα","Request sent ✓":"Το αίτημα στάλθηκε ✓","✓ Validate":"✓ Επιβεβαίωση","Send my brief to Domifind":"Αποστολή του αιτήματος στη Domifind","or":"ή","send it on WhatsApp":"στείλτε το στο WhatsApp","Thank you!":"Ευχαριστούμε!","Your request":"Το αίτημά σας","has been received.":"ελήφθη.","We'll contact you within 24 hours.":"Θα επικοινωνήσουμε μαζί σας μέσα σε 24 ώρες.","Sending…":"Αποστολή…","Something went wrong. Please try again, or send it on WhatsApp.":"Κάτι πήγε στραβά. Δοκιμάστε ξανά ή στείλτε το στο WhatsApp.",
+const EL = {"Between":"Από","and":"έως","We'll contact you within 48 hours.":"Θα επικοινωνήσουμε μαζί σας μέσα σε 48 ώρες.","Start a new search":"Νέα αναζήτηση","Back to homepage":"Αρχική σελίδα","Request sent ✓":"Το αίτημα στάλθηκε ✓","✓ Validate":"✓ Επιβεβαίωση","Send my brief to Domifind":"Αποστολή του αιτήματος στη Domifind","or":"ή","send it on WhatsApp":"στείλτε το στο WhatsApp","Thank you!":"Ευχαριστούμε!","Your request":"Το αίτημά σας","has been received.":"ελήφθη.","We'll contact you within 24 hours.":"Θα επικοινωνήσουμε μαζί σας μέσα σε 24 ώρες.","Sending…":"Αποστολή…","Something went wrong. Please try again, or send it on WhatsApp.":"Κάτι πήγε στραβά. Δοκιμάστε ξανά ή στείλτε το στο WhatsApp.",
 "How it works":"Πώς λειτουργεί","Why Domifind":"Γιατί Domifind","FAQ":"Συχνές ερωτήσεις","Start my search":"Ξεκινήστε την αναζήτηση",
 "Your home, found.":"Το σπίτι σας, βρέθηκε.",
 "Personal property search across Cyprus":"Προσωπική αναζήτηση ακινήτων σε όλη την Κύπρο",
