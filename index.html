@@ -998,8 +998,8 @@ $$("#deal button").forEach(b=>b.onclick=()=>{
 });
 function fillPrices(){
   const vals = S.deal==="Buy"?BUY:RENT, suf = S.deal==="Rent"?" "+T("/month"):"";
-  /* the minimum is preselected: €100,000 when buying (€150,000 for apartments), €500/month when renting */
-  const floor = (S.deal==="Buy" && S.types.includes("Apartment")) ? 150000 : 0;
+  /* the minimum is preselected: €150,000 when buying (€100,000 for plots / land), €500/month when renting */
+  const floor = S.deal!=="Buy" ? 0 : S.types.includes("Plot / Land") ? 100000 : 150000;
   $("#pmin").innerHTML = vals.filter(v=>v>=floor).map(v=>`<option value="${v}">${fmt(v)}${suf}</option>`).join("");
   $("#pmax").innerHTML = `<option value="" disabled selected hidden>${T("Select maximum")}</option>`+vals.map(v=>`<option value="${v}">${fmt(v)}${suf}</option>`).join("")+(S.deal==="Buy"?`<option value="99999999">€10M+</option>`:"");
   $("#budgetHint").textContent = T(S.deal==="Buy" ? "Your purchase budget in euros." : "Your monthly rent budget in euros.");
@@ -1008,8 +1008,11 @@ function fillPrices(){
 }
 /* rebuild the minimum list when the property type changes, keeping the client's choice when still allowed */
 function refreshMin(){
-  const keep=$("#pmin").value, keepMax=$("#pmax").value;
-  fillPrices(); $("#pmin").value=keep; $("#pmax").value=keepMax; fixMin();
+  const oldFirst=$("#pmin").options[0]&&$("#pmin").options[0].value, keep=$("#pmin").value, keepMax=$("#pmax").value;
+  fillPrices();
+  /* if the client had left the minimum at the lowest choice, move it to the new lowest choice (e.g. €100,000 for land) */
+  $("#pmin").value = keep===oldFirst ? $("#pmin").options[0].value : keep;
+  $("#pmax").value=keepMax; fixMin();
 }
 /* if a saved minimum no longer exists (e.g. €50K), fall back to the first option */
 function fixMin(){ if($("#pmin").selectedIndex<0) $("#pmin").selectedIndex=0; syncMax(); }
