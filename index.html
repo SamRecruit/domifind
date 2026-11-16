@@ -1293,12 +1293,14 @@ function update(){
 function briefText(){
   const keep=LANG; LANG="en";
   const L=[], add=(k,v)=>{ if(v && (!Array.isArray(v)||v.length)) L.push(`${k}: ${Array.isArray(v)?v.join(", "):v}`)};
+  add("Name",$("#name").value.trim()); add("Phone",$("#phone").value.trim()); add("Email",$("#email").value.trim());
+  add("Contact by",S.contact); add("Language",S.lang);
+  L.push("");
   L.push("🏠 DOMIFIND — NEW PROPERTY BRIEF");
   if(keep==="ru") L.push("🇷🇺 Client used the Russian version of the site");
   if(keep==="el") L.push("🇬🇷 Client used the Greek version of the site");
   L.push("");
-  add("Name",$("#name").value.trim()); L.push(""); add("Phone",$("#phone").value.trim()); L.push(""); add("Email",$("#email").value.trim());
-  add("Contact by",S.contact); add("Language",S.lang); add("Situation",S.incy); add("Timing",S.when);
+  add("Situation",S.incy); add("Timing",S.when);
   L.push("");
   add("Looking to",S.deal); add("Property type",S.types); add("Purpose",S.purpose); add("Condition",S.condition); if(S.condition.includes(OFFPLAN)) add("Max delivery time",S.delivery);
   L.push(""); add("📍 Location",whereText()); add("Location preferences",S.locpref); add("Must be close to",$("#near").value.trim());
