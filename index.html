@@ -1313,10 +1313,19 @@ function checkStep(i, show){
   }
   return ok;
 }
-function go(n){
+/* opt.hist: "push" (default) adds a browser-history entry so the phone/browser back arrow returns to the previous step;
+   "replace" overwrites the current one; "none" when the step change itself comes from the back/forward arrow. opt.noScroll on page load */
+let pushedSteps=0;
+function go(n,opt={}){
   firstMissing=null;
-  if(n>step){ for(let i=0;i<n && i<5;i++){ if(!checkStep(i,true)){ n=i; break; } } }
-  step=n;
+  if(n>step){ for(let i=0;i<n && i<5;i++){ if(!checkStep(i,!opt.quiet)){ n=i; break; } } }
+  const changed = n!==step;
+  step=n; S.step=n; save();
+  const mode=opt.hist||"push";
+  try{
+    if(mode==="push" && changed){ history.pushState({step:n},"","#brief"); pushedSteps++; }
+    else if(mode==="replace"){ history.replaceState({step:n},""); }
+  }catch(e){}
   $$(".pane").forEach(p=>p.classList.toggle("active",+p.dataset.pane===n));
   $$("#progress button").forEach((b,i)=>{b.classList.toggle("active",i===n);b.classList.toggle("done",i<n)});
   $("#back").style.visibility = n===0?"hidden":"visible";
@@ -1324,6 +1333,7 @@ function go(n){
   setNext();
   if(n===5) buildReview();
   /* jump to the first missing question, otherwise to the top of the form */
+  if(opt.noScroll) return;
   if(firstMissing) firstMissing.scrollIntoView({behavior:"smooth",block:"center"});
   else { /* show the top of the form card (step tabs), not the section title, so Back/Next feel like turning a page */
     const top=$(".wizard .panel").getBoundingClientRect().top+scrollY-90;
@@ -1331,7 +1341,15 @@ function go(n){
 }
 
 $("#next").onclick=()=>go(step+1);
-$("#back").onclick=()=>go(step-1);
+/* the form's Back button steps back through the same history as the browser arrow, so the two never disagree */
+$("#back").onclick=()=>{ if(pushedSteps>0 && history.state && history.state.step===step) history.back(); else go(step-1,{hist:"replace"}); };
+/* browser / phone back arrow: go to the previous step instead of leaving the page */
+addEventListener("popstate",e=>{
+  const st=e.state; if(!st || typeof st.step!=="number") return;   /* other in-page links (#top, #how...) */
+  if(SENT) return;   /* after sending, the thank-you stays on screen */
+  if(st.step<step) pushedSteps=Math.max(0,pushedSteps-1); else if(st.step>step) pushedSteps++;
+  go(st.step,{hist:"none"});
+});
 $$("#progress button").forEach(b=>b.onclick=()=>go(+b.dataset.go));
 
 /* Summary (T() makes these follow the page language) */
@@ -1458,6 +1476,8 @@ if(location.hash==="#ru") startLang="ru";
 if(location.hash==="#el") startLang="el";
 if(location.hash==="#en") startLang="en";
 applyLang(startLang);
+/* come back to the step the client was on (a sent brief is not saved, so it opens fresh) */
+go(+S.step||0,{hist:"replace",noScroll:true,quiet:true});
 </script>
 </body>
 </html>
