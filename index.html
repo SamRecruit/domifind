@@ -1370,16 +1370,23 @@ function update(){
 }
 
 /* Review & send. The brief you receive is always in English. */
-function briefText(){
+/* short client code: initials + last 4 digits of the phone, e.g. "S.M. 4882" */
+function clientCode(){
+  const ini=$("#name").value.trim().split(/\s+/).filter(Boolean).map(w=>w[0].toUpperCase()+".").join("");
+  const d=$("#phone").value.replace(/\D/g,""), last=d.length>=4?d.slice(-4):"";
+  return [ini,last].filter(Boolean).join(" ");
+}
+function briefText(forEmail){
   const keep=LANG; LANG="en";
   const L=[], add=(k,v)=>{ if(v && (!Array.isArray(v)||v.length)) L.push(`${k}: ${Array.isArray(v)?v.join(", "):v}`)};
   add("Name",$("#name").value.trim()); add("Phone",$("#phone").value.trim()); add("Email",$("#email").value.trim());
   add("Contact by",S.contact); add("Language",S.lang);
-  L.push("");
+  L.push(""); if(forEmail){ L.push("━━━━━━━━━━━━━━━━━━━━━━━━━━━━"); L.push(""); }   /* thick line, only in the email to Domifind */
   /* short reference: 2 letters + 4 numbers (no I or O, to avoid confusion with 1 and 0); kept for this client's draft */
   if(!S.ref){ const A="ABCDEFGHJKLMNPQRSTUVWXYZ", r=n=>Math.floor(Math.random()*n); S.ref=A[r(24)]+A[r(24)]+String(r(10000)).padStart(4,"0"); try{save()}catch(e){} }
   L.push("🏠 DOMIFIND — NEW PROPERTY BRIEF");
   L.push("Ref: "+S.ref);
+  if(forEmail && clientCode()) L.push("Client: "+clientCode());   /* only in the email to Domifind */
   if(keep==="ru") L.push("🇷🇺 Client used the Russian version of the site");
   if(keep==="el") L.push("🇬🇷 Client used the Greek version of the site");
   L.push("");
@@ -1406,11 +1413,11 @@ $$('a[href="#brief"]').forEach(a=>a.addEventListener("click",e=>{ if(SENT){ e.pr
 $("#newSearch").onclick=()=>{ try{localStorage.removeItem("domifind-draft-v2")}catch(e){} location.hash="brief"; location.reload(); };
 /* Validate: email the brief to Domifind (Web3Forms) and show a thank-you message */
 $("#validateBtn").onclick=async()=>{
-  const btn=$("#validateBtn"), err=$("#sendErr"), t=briefText(), nm=$("#name").value.trim();
+  const btn=$("#validateBtn"), err=$("#sendErr"), t=briefText(true), nm=$("#name").value.trim();
   btn.disabled=true; $("#validateLbl").textContent=T("Sending…"); err.style.display="none";
   try{
     const r=await fetch("https://api.web3forms.com/submit",{method:"POST",headers:{"Content-Type":"application/json",Accept:"application/json"},
-      body:JSON.stringify({access_key:CONFIG.formKey,subject:`Domifind brief ${S.ref} — ${nm||"New client"}`,from_name:"Domifind website",
+      body:JSON.stringify({access_key:CONFIG.formKey,subject:["Domifind brief "+S.ref, clientCode(), nm].filter(Boolean).join(" — "),from_name:"Domifind website",
         replyto:$("#email").value.trim()||undefined,message:t})});   /* contact details are already inside the brief, so they are not sent twice */
     const j=await r.json().catch(()=>({}));
     if(!r.ok||!j.success) throw new Error(j.message||"failed");
