@@ -60,7 +60,11 @@ nav .wrap{display:flex;align-items:center;justify-content:space-between;height:6
 .hero h1 em{font-style:italic;color:var(--terra)}
 .hero p.lead{font-size:1.15rem;color:var(--muted);max-width:520px}
 .lead-q{display:block;font-family:Fraunces,Georgia,serif;font-size:1.65rem;font-weight:700;color:var(--sea);line-height:1.2;margin-bottom:8px}
-.hero-cta{display:flex;gap:12px;flex-wrap:wrap;margin:28px 0 22px}
+.hero-cta{display:flex;gap:14px;flex-wrap:wrap;margin:32px 0 24px}
+.hero-cta .btn{padding:17px 28px;font-size:1.12rem}
+.hero-cta .btn-primary{box-shadow:0 10px 26px rgba(217,115,78,.42)}
+.hero-cta .btn-ghost{border-width:2px}
+@media(max-width:620px){.hero-cta{flex-direction:column;align-items:stretch}.hero-cta .btn{justify-content:center;padding:18px 20px}}
 .timesave{display:inline-flex;align-items:center;gap:12px;background:#fff;border:1.5px solid #F1CDBB;border-radius:16px;padding:10px 18px 10px 10px;margin-bottom:18px;font-family:Fraunces,Georgia,serif;font-size:1.35rem;font-weight:600;color:var(--sea)}
 .checked{margin-top:40px;background:#fff;border:1.5px solid var(--line);border-radius:20px;padding:26px 30px;display:grid;grid-template-columns:1fr 1fr;gap:12px 30px}
 .checked h3{grid-column:1/-1;font-family:Fraunces,Georgia,serif;font-size:1.6rem;color:var(--sea);margin:0 0 4px}
