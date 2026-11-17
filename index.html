@@ -62,6 +62,7 @@ nav .wrap{display:flex;align-items:center;justify-content:space-between;height:6
 .lead-q{display:block;font-family:Fraunces,Georgia,serif;font-size:1.65rem;font-weight:700;color:var(--sea);line-height:1.2;margin-bottom:8px}
 .hero-cta{display:flex;gap:12px;flex-wrap:wrap;margin:28px 0 22px}
 .timesave{display:inline-flex;align-items:center;gap:12px;background:#fff;border:1.5px solid #F1CDBB;border-radius:16px;padding:10px 18px 10px 10px;margin-bottom:18px;font-family:Fraunces,Georgia,serif;font-size:1.35rem;font-weight:600;color:var(--sea)}
+.timesave .ts-n{color:var(--terra)}
 .timesave .ic{width:40px;height:40px;border-radius:12px;background:#FDF1EB;display:grid;place-items:center;font-size:1.25rem}
 .trust{display:flex;gap:22px;flex-wrap:wrap;font-size:.9rem;color:var(--muted);font-weight:600}
 .trust b{color:var(--sea)}
@@ -284,7 +285,7 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px;
         <a href="#brief" class="btn btn-primary">Describe my ideal property →</a>
         <a href="#how" class="btn btn-ghost">See how it works</a>
       </div>
-      <div class="timesave"><span class="ic">⏱</span><span>Save 50+ hours of searching</span></div>
+      <div class="timesave"><span class="ic">🔎</span><span><b class="ts-n">10,000+</b> <span>apartments for sale in Limassol alone.</span><br><span>We go through them, so you don't have to.</span></span></div>
       <div class="trust">
         <div><b>0 €</b> upfront</div>
         <div><b>1</b> brief, not 50 calls</div>
@@ -756,7 +757,7 @@ const CONFIG = {
 };
 
 /* ===== RUSSIAN ===== */
-const RU = {"Something went wrong. Please try again, or":"Что-то пошло не так. Попробуйте ещё раз или","Between":"От","and":"до","We'll contact you within 48 hours.":"Мы свяжемся с вами в течение 48 часов.","Start a new search":"Начать новый поиск","Back to homepage":"На главную","Request sent ✓":"Заявка отправлена ✓","✓ Validate":"✓ Подтвердить","Send my brief to Domifind":"Отправить заявку в Domifind","or":"или","send it on WhatsApp":"отправить в WhatsApp","Thank you!":"Спасибо!","Your request":"Ваша заявка","has been received.":"получена.","We'll contact you within 24 hours.":"Мы свяжемся с вами в течение 24 часов.","Sending…":"Отправка…","Something went wrong. Please try again, or send it on WhatsApp.":"Что-то пошло не так. Попробуйте ещё раз или отправьте в WhatsApp.",
+const RU = {"apartments for sale in Limassol alone.":"квартир на продажу только в Лимасоле.","We go through them, so you don't have to.":"Мы просматриваем их все, чтобы вам не пришлось.","Something went wrong. Please try again, or":"Что-то пошло не так. Попробуйте ещё раз или","Between":"От","and":"до","We'll contact you within 48 hours.":"Мы свяжемся с вами в течение 48 часов.","Start a new search":"Начать новый поиск","Back to homepage":"На главную","Request sent ✓":"Заявка отправлена ✓","✓ Validate":"✓ Подтвердить","Send my brief to Domifind":"Отправить заявку в Domifind","or":"или","send it on WhatsApp":"отправить в WhatsApp","Thank you!":"Спасибо!","Your request":"Ваша заявка","has been received.":"получена.","We'll contact you within 24 hours.":"Мы свяжемся с вами в течение 24 часов.","Sending…":"Отправка…","Something went wrong. Please try again, or send it on WhatsApp.":"Что-то пошло не так. Попробуйте ещё раз или отправьте в WhatsApp.",
 "How it works":"Как это работает","Why Domifind":"Почему Domifind","FAQ":"Вопросы","Start my search":"Начать поиск",
 "Your home, found.":"Ваш дом найден.",
 "Personal property search across Cyprus":"Персональный поиск недвижимости по всему Кипру",
@@ -847,7 +848,7 @@ const RU = {"Something went wrong. Please try again, or":"Что-то пошло
 "meter0":"Заявка заполнена на {p}%. Продолжайте","meter1":"Заявка заполнена на {p}%. Отлично","meter2":"Заявка готова ✓ Можно отправлять"
 };
 const EN_METER = {meter0:"Brief {p}% complete. Keep going",meter1:"Brief {p}% complete. Looking good",meter2:"Brief complete ✓ Ready to send"};
-const EL = {"Something went wrong. Please try again, or":"Κάτι πήγε στραβά. Δοκιμάστε ξανά ή","Between":"Από","and":"έως","We'll contact you within 48 hours.":"Θα επικοινωνήσουμε μαζί σας μέσα σε 48 ώρες.","Start a new search":"Νέα αναζήτηση","Back to homepage":"Αρχική σελίδα","Request sent ✓":"Το αίτημα στάλθηκε ✓","✓ Validate":"✓ Επιβεβαίωση","Send my brief to Domifind":"Αποστολή του αιτήματος στη Domifind","or":"ή","send it on WhatsApp":"στείλτε το στο WhatsApp","Thank you!":"Ευχαριστούμε!","Your request":"Το αίτημά σας","has been received.":"ελήφθη.","We'll contact you within 24 hours.":"Θα επικοινωνήσουμε μαζί σας μέσα σε 24 ώρες.","Sending…":"Αποστολή…","Something went wrong. Please try again, or send it on WhatsApp.":"Κάτι πήγε στραβά. Δοκιμάστε ξανά ή στείλτε το στο WhatsApp.",
+const EL = {"apartments for sale in Limassol alone.":"διαμερίσματα προς πώληση μόνο στη Λεμεσό.","We go through them, so you don't have to.":"Τα εξετάζουμε όλα, για να μη χρειαστεί εσείς.","Something went wrong. Please try again, or":"Κάτι πήγε στραβά. Δοκιμάστε ξανά ή","Between":"Από","and":"έως","We'll contact you within 48 hours.":"Θα επικοινωνήσουμε μαζί σας μέσα σε 48 ώρες.","Start a new search":"Νέα αναζήτηση","Back to homepage":"Αρχική σελίδα","Request sent ✓":"Το αίτημα στάλθηκε ✓","✓ Validate":"✓ Επιβεβαίωση","Send my brief to Domifind":"Αποστολή του αιτήματος στη Domifind","or":"ή","send it on WhatsApp":"στείλτε το στο WhatsApp","Thank you!":"Ευχαριστούμε!","Your request":"Το αίτημά σας","has been received.":"ελήφθη.","We'll contact you within 24 hours.":"Θα επικοινωνήσουμε μαζί σας μέσα σε 24 ώρες.","Sending…":"Αποστολή…","Something went wrong. Please try again, or send it on WhatsApp.":"Κάτι πήγε στραβά. Δοκιμάστε ξανά ή στείλτε το στο WhatsApp.",
 "How it works":"Πώς λειτουργεί","Why Domifind":"Γιατί Domifind","FAQ":"Συχνές ερωτήσεις","Start my search":"Ξεκινήστε την αναζήτηση",
 "Your home, found.":"Το σπίτι σας, βρέθηκε.",
 "Personal property search across Cyprus":"Προσωπική αναζήτηση ακινήτων σε όλη την Κύπρο",
