@@ -593,19 +593,7 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px;
             <div class="lg"><span class="lg-chip must">2×</span><div><b>Tap twice</b><span class="lg-res must"><span>Must have</span><svg class="gold-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg></span></div></div>
             <div class="lg"><span class="lg-chip">3×</span><div><b>Tap again</b><span class="lg-res">Clear</span></div></div>
           </div>
-          <div class="q">
-            <label class="t">Outdoor & views</label>
-            <div class="chips" data-tri="fac">
-              <button class="chip" data-v="Private pool">Private pool</button>
-              <button class="chip" data-v="Communal pool">Communal pool</button>
-              <button class="chip" data-v="Garden">Garden</button>
-              <button class="chip" data-v="Large veranda">Large veranda</button>
-              <button class="chip" data-v="Roof garden">Roof garden</button>
-              <button class="chip" data-v="Sea view">Sea view</button>
-              <button class="chip" data-v="BBQ area">BBQ area</button>
-            </div>
-          </div>
-          <div class="q">
+          <div class="q" id="facBuilding">
             <label class="t">Building & comfort</label>
             <div class="chips" data-tri="fac">
               <button class="chip" data-v="Covered parking">Covered parking</button>
@@ -621,8 +609,8 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px;
               <button class="chip" data-v="Gym">Gym</button>
             </div>
           </div>
-          <div class="q">
-            <label class="t">Practical</label>
+          <div class="q" id="facPractical">
+            <label class="t">Practical <small>(optional)</small></label>
             <div class="chips" data-tri="fac">
               <button class="chip" data-v="Title deeds available">Title deeds available</button>
               <button class="chip" data-v="Furnished">Furnished</button>
@@ -631,6 +619,18 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px;
               <button class="chip" data-v="Ground floor / no stairs">Ground floor / no stairs</button>
               <button class="chip" data-v="Wheelchair accessible">Accessible</button>
               <button class="chip" data-v="Rental income potential">Rental potential</button>
+            </div>
+          </div>
+          <div class="q" id="facOutdoor">
+            <label class="t">Outdoor & views <small>(optional)</small></label>
+            <div class="chips" data-tri="fac">
+              <button class="chip" data-v="Private pool">Private pool</button>
+              <button class="chip" data-v="Communal pool">Communal pool</button>
+              <button class="chip" data-v="Garden">Garden</button>
+              <button class="chip" data-v="Large veranda">Large veranda</button>
+              <button class="chip" data-v="Roof garden">Roof garden</button>
+              <button class="chip" data-v="Sea view">Sea view</button>
+              <button class="chip" data-v="BBQ area">BBQ area</button>
             </div>
           </div>
           <div class="q">
@@ -1267,9 +1267,8 @@ const REQ = {
       ["Financing",()=>S.deal!=="Buy"||S.finance,()=>chipsQ('[data-single="finance"]')],
       ["Bedrooms",()=>noBeds()||S.beds,()=>chipsQ('[data-single="beds"]')],
       ["Bathrooms",()=>noRooms()||bathsOpt()||S.baths,()=>chipsQ('[data-single="baths"]')]],
-  3: [["Outdoor & views",()=>!isResidential()||triOK(0),()=>({q:$$("[data-tri]")[0].closest(".q"),box:$$("[data-tri]")[0]})],
-      ["Building & comfort",()=>!isResidential()||triOK(1),()=>({q:$$("[data-tri]")[1].closest(".q"),box:$$("[data-tri]")[1]})],
-      ["Practical",()=>!isResidential()||triOK(2),()=>({q:$$("[data-tri]")[2].closest(".q"),box:$$("[data-tri]")[2]})],
+  /* Building & comfort: at least one choice for homes; Practical and Outdoor & views are optional */
+  3: [["Building & comfort",()=>!isResidential()||$("#facBuilding").style.display==="none"||triOK(0),()=>({q:$("#facBuilding"),box:$("#facBuilding [data-tri]")})],
       ["Must-haves",()=>!isCommercial()||anyMust(),firstVisibleTri]],
   4: [["Full name",()=>$("#name").value.trim(),()=>({q:$("#name").closest(".q"),box:$("#name")}),"This field is required"],
       ["Phone / WhatsApp",()=>$("#phone").value.trim(),()=>({q:$("#phone").closest(".q"),box:$("#phone")}),"This field is required"],
